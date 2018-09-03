@@ -1,0 +1,6 @@
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Entities.dll
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Entities.pdb
+D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.csprojAssemblyReference.cache
+D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.csproj.CoreCompileInputs.cache
+D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.dll
+D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.pdb

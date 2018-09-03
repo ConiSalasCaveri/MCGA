@@ -1,0 +1,7 @@
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Data.dll
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Data.pdb
+D:\!MCGA-2018\MCGA-Application\Data\MCGA.Data\obj\Debug\MCGA.Data.csprojAssemblyReference.cache
+D:\!MCGA-2018\MCGA-Application\Data\MCGA.Data\obj\Debug\MCGA.Data.csproj.CoreCompileInputs.cache
+D:\!MCGA-2018\MCGA-Application\Data\MCGA.Data\obj\Debug\MCGA.Data.csproj.CopyComplete
+D:\!MCGA-2018\MCGA-Application\Data\MCGA.Data\obj\Debug\MCGA.Data.dll
+D:\!MCGA-2018\MCGA-Application\Data\MCGA.Data\obj\Debug\MCGA.Data.pdb

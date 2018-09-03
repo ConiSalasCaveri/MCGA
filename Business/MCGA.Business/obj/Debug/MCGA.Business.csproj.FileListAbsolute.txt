@@ -1,0 +1,7 @@
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Business.dll
+D:\!MCGA-2018\MCGA-Application\bin\MCGA.Business.pdb
+D:\!MCGA-2018\MCGA-Application\Business\MCGA.Business\obj\Debug\MCGA.Business.csprojAssemblyReference.cache
+D:\!MCGA-2018\MCGA-Application\Business\MCGA.Business\obj\Debug\MCGA.Business.csproj.CoreCompileInputs.cache
+D:\!MCGA-2018\MCGA-Application\Business\MCGA.Business\obj\Debug\MCGA.Business.csproj.CopyComplete
+D:\!MCGA-2018\MCGA-Application\Business\MCGA.Business\obj\Debug\MCGA.Business.dll
+D:\!MCGA-2018\MCGA-Application\Business\MCGA.Business\obj\Debug\MCGA.Business.pdb
