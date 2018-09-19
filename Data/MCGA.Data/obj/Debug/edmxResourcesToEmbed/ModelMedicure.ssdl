@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Afiliado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TipoDocumentoId" Type="int" Nullable="false" />
+    <Property Name="Numero" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="TipoSexoId" Type="int" Nullable="false" />
+    <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+    <Property Name="EstadoCivilId" Type="int" Nullable="false" />
+    <Property Name="NumeroAfiliado" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PlanId" Type="int" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="255" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="deletedon" Type="datetime2" Precision="7" />
+    <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Agenda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EspecialidadProfesionalId" Type="int" Nullable="false" />
+    <Property Name="TipoDiaId" Type="int" Nullable="false" />
+    <Property Name="fecha_desde" Type="datetime" Nullable="false" />
+    <Property Name="fecha_hasta" Type="datetime" Nullable="false" />
+    <Property Name="hora_desde" Type="time" Precision="0" Nullable="false" />
+    <Property Name="hora_hasta" Type="time" Precision="0" Nullable="false" />
+    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="deletedon" Type="datetime2" Precision="7" />
+    <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Especialidad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="frecuencia" Type="int" Nullable="false" />
+    <Property Name="TipoEspecialidadId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profesional">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TipoDocumentoId" Type="int" Nullable="false" />
+    <Property Name="Numero" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+    <Property Name="Matricula" Type="nvarchar" MaxLength="255" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="255" />
+    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="deletedon" Type="datetime2" Precision="7" />
+    <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoDia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoReseva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoSexo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Afiliado_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="TipoDocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Afiliado_TipoSexo">
+    <End Role="TipoSexo" Type="Self.TipoSexo" Multiplicity="1" />
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoSexo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Afiliado">
+        <PropertyRef Name="TipoSexoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agenda_TipoDia">
+    <End Role="TipoDia" Type="Self.TipoDia" Multiplicity="1" />
+    <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agenda">
+        <PropertyRef Name="TipoDiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profesional_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Profesional">
+        <PropertyRef Name="TipoDocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicureModelStoreContainer">
+    <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoDia" EntityType="Self.TipoDia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoReseva" EntityType="Self.TipoReseva" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Afiliado_TipoDocumento" Association="Self.FK_Afiliado_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Afiliado_TipoSexo" Association="Self.FK_Afiliado_TipoSexo">
+      <End Role="TipoSexo" EntitySet="TipoSexo" />
+      <End Role="Afiliado" EntitySet="Afiliado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agenda_TipoDia" Association="Self.FK_Agenda_TipoDia">
+      <End Role="TipoDia" EntitySet="TipoDia" />
+      <End Role="Agenda" EntitySet="Agenda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profesional_TipoDocumento" Association="Self.FK_Profesional_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Profesional" EntitySet="Profesional" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

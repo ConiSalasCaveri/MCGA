@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,9 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfiliadoProcess.cs" />
+    <Compile Include="AgendaProcess.cs" />
+    <Compile Include="EspecialidadProcess.cs" />
+    <Compile Include="ICrud.cs" />
+    <Compile Include="ProfesionalProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoDiaProcess.cs" />
+    <Compile Include="TipoDocumentoProcess.cs" />
+    <Compile Include="TipoReservaProcess.cs" />
+    <Compile Include="TipoSexoProcess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\MCGA.Business\MCGA.Business.csproj">
+      <Project>{8B16F38F-32F0-4B6C-848A-404014161AF2}</Project>
+      <Name>MCGA.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\MCGA.Entities\MCGA.Entities.csproj">
       <Project>{9CC9E395-4E72-47FC-9F03-C1CA9E69261D}</Project>
       <Name>MCGA.Entities</Name>

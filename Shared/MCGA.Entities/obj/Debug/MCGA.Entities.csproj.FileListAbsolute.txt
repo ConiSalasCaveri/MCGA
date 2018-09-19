@@ -4,3 +4,9 @@ D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.cspr
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.csproj.CoreCompileInputs.cache
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.dll
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.pdb
+C:\MCGA\MCGA\bin\MCGA.Entities.dll
+C:\MCGA\MCGA\bin\MCGA.Entities.pdb
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.dll
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Debug\MCGA.Entities.pdb

@@ -1,0 +1,23 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <li class="nav navbar-nav">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="color: white;">
+        Atributos <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="#" disabled>Atributos</a></li>
+        <li class="divider"></li>
+        <li>@Html.ActionLink("Dia", "Index", "Masters/TipoDia")</li>
+        <li>@Html.ActionLink("Sexo", "Index", "Masters/TipoSexo")</li>
+        <li>@Html.ActionLink("Reserva", "Index", "Masters/TipoReserva")</li>
+        <li>@Html.ActionLink("Documento", "Index", "Masters/TipoDocumento")</li>
+        <li>@Html.ActionLink("Profesional", "Index", "Masters/Profesional")</li>
+        <li>@Html.ActionLink("Especialidad", "Index", "Masters/Especialidad")</li>
+        <li>@Html.ActionLink("Agenda", "Index", "Masters/Agenda")</li>
+        <li>@Html.ActionLink("Afiliado", "Index", "Masters/Afiliado")</li>
+        <li><a href="#">Médicos</a></li>
+        <li class="divider"></li>
+    </ul>
+    </li>
+
+}

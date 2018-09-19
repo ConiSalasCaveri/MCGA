@@ -29,5 +29,21 @@ namespace MCGA.WebSite.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.TipoSexo> TipoSexoes { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.TipoDia> TipoDias { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Afiliado> Afiliadoes { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.TipoDocumento> TipoDocumentoes { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Profesional> Profesionals { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Especialidad> Especialidads { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Agenda> Agenda { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.TipoReseva> TipoResevas { get; set; }
     }
 }

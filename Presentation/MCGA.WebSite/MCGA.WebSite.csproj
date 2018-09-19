@@ -46,10 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.26.0, Culture=neutral, PublicKeyToken=fc5550082a9c642c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.26\lib\net452\Boilerplate.Web.Mvc5.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -195,6 +199,35 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Masters\Controllers\AfiliadoController.cs" />
+    <Compile Include="Areas\Masters\Controllers\AgendaController.cs" />
+    <Compile Include="Areas\Masters\Controllers\EspecialidadController.cs" />
+    <Compile Include="Areas\Masters\Controllers\ProfesionalController.cs" />
+    <Compile Include="Areas\Masters\Controllers\TipoDiaController.cs" />
+    <Compile Include="Areas\Masters\Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Areas\Masters\Controllers\TipoResevaController.cs" />
+    <Compile Include="Areas\Masters\Controllers\TipoSexoController.cs" />
+    <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
+    <Compile Include="Constants\AfiliadoController\AfiliadoControllerAction.cs" />
+    <Compile Include="Constants\AfiliadoController\AfiliadoControllerRoute.cs" />
+    <Compile Include="Constants\AgendaController\AgendaControllerAction.cs" />
+    <Compile Include="Constants\AgendaController\AgendaControllerRoute.cs" />
+    <Compile Include="Constants\Application.cs" />
+    <Compile Include="Constants\ControllerName.cs" />
+    <Compile Include="Constants\EspecialidadController\EspecialidadControllerAction.cs" />
+    <Compile Include="Constants\EspecialidadController\EspecialidadControllerRoute.cs" />
+    <Compile Include="Constants\HomeController\HomeControllerAction.cs" />
+    <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
+    <Compile Include="Constants\ProfesionalController\ProfesionalControllerAction.cs" />
+    <Compile Include="Constants\ProfesionalController\ProfesionalControllerRoute.cs" />
+    <Compile Include="Constants\TipoDiaController\TipoDiaControllerAction.cs" />
+    <Compile Include="Constants\TipoDiaController\TipoDiaControllerRoute.cs" />
+    <Compile Include="Constants\TipoDocumentoController\TipoDocumentoControllerAction.cs" />
+    <Compile Include="Constants\TipoDocumentoController\TipoDocumentoControllerRoute.cs" />
+    <Compile Include="Constants\TipoReservaController\TipoReservaControllerAction.cs" />
+    <Compile Include="Constants\TipoReservaController\TipoReservaControllerRoute.cs" />
+    <Compile Include="Constants\TipoSexoController\TipoSexoControllerAction.cs" />
+    <Compile Include="Constants\TipoSexoController\TipoSexoControllerRoute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -212,6 +245,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\1.jpg" />
+    <Content Include="Content\Images\2.jpg" />
+    <Content Include="Content\Images\3.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,6 +257,49 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Masters\Views\web.config" />
+    <Content Include="Areas\Masters\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Masters\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDia\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDia\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDia\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDia\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDia\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Afiliado\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\Afiliado\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\Afiliado\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\Afiliado\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\Afiliado\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDocumento\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDocumento\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDocumento\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDocumento\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoDocumento\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoSexo\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoSexo\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoSexo\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoSexo\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoSexo\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Profesional\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\Profesional\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\Profesional\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\Profesional\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\Profesional\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Agenda\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\Agenda\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\Agenda\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\Agenda\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\Agenda\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoReseva\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoReseva\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoReseva\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoReseva\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoReseva\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -232,8 +311,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Content\Images\510652623-medico-jefe-estudiante-de-medicina-apple-ipad-aconsejar.jpg" />
-    <Content Include="Content\Images\bg-1.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -268,9 +345,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\PartialHome.cshtml" />
+    <Content Include="Views\Shared\LayoutPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Masters\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -284,6 +364,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\MCGA.Entities\MCGA.Entities.csproj">
+      <Project>{9cc9e395-4e72-47fc-9f03-c1ca9e69261d}</Project>
+      <Name>MCGA.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\MCGA.Framework\MCGA.Framework.csproj">
+      <Project>{81cf6df1-4e5a-4fb8-9b3a-791b9f09c51d}</Project>
+      <Name>MCGA.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MCGA.UI.Process\MCGA.UI.Process.csproj">
+      <Project>{8dce9c31-1356-475e-bb8e-fe16554b4be0}</Project>
+      <Name>MCGA.UI.Process</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

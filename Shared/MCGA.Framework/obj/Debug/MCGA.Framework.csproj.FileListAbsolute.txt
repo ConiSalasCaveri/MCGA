@@ -4,3 +4,9 @@ D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.cs
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.csproj.CoreCompileInputs.cache
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.dll
 D:\!MCGA-2018\MCGA-Application\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.pdb
+C:\MCGA\MCGA\bin\MCGA.Framework.dll
+C:\MCGA\MCGA\bin\MCGA.Framework.pdb
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.dll
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.pdb

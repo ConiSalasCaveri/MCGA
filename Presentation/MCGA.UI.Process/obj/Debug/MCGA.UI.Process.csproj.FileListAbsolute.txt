@@ -5,3 +5,10 @@ D:\!MCGA-2018\MCGA-Application\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Pr
 D:\!MCGA-2018\MCGA-Application\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.csproj.CopyComplete
 D:\!MCGA-2018\MCGA-Application\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.dll
 D:\!MCGA-2018\MCGA-Application\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.pdb
+C:\MCGA\MCGA\bin\MCGA.UI.Process.dll
+C:\MCGA\MCGA\bin\MCGA.UI.Process.pdb
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.csproj.CopyComplete
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.dll
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Debug\MCGA.UI.Process.pdb
