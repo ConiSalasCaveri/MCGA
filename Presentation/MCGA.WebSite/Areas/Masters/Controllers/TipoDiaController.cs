@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using WebApplication1.Services.Cache;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -12,9 +14,17 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // GET: Masters/TipoDia
         public ActionResult Index()
         {
-            return View(component.Get());
+            //return View(component.Get());
+            var list = DataCache.Instance.TipoDiaList();
+            return View(list);
         }
 
+        public ActionResult List()
+        {
+            //return View(component.Get());
+            var list = DataCache.Instance.TipoDiaList();
+            return View(list);
+        }
         // GET: Masters/TipoDia/Details/5
         public ActionResult Details(int? id)
         {
@@ -115,5 +125,15 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             }
             base.Dispose(disposing);
         }
+        public JsonResult GetDias(string Areas, string term = "")
+        {
+            var lista = component.Get();
+
+            lista.Where(x => x.descripcion.Contains(term))
+                 .OrderBy(x => x.Id).ToList();
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -17,6 +17,8 @@
         <AssociationConnector Association="MedicureModel.FK_Afiliado_TipoSexo" />
         <AssociationConnector Association="MedicureModel.FK_Agenda_TipoDia" />
         <AssociationConnector Association="MedicureModel.FK_Profesional_TipoDocumento" />
+        <EntityTypeShape EntityType="MedicureModel.Turno" Width="1.5" PointX="8.25" PointY="5.125" />
+        <AssociationConnector Association="MedicureModel.FK__Turnos__afiliado__797309D9" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -115,5 +115,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Turno">
+      <EntityTypeMapping TypeName="MedicureModel.Turno">
+        <MappingFragment StoreEntitySet="Turno">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="reserva" ColumnName="reserva" />
+          <ScalarProperty Name="EspecialidadProfesionalId" ColumnName="EspecialidadProfesionalId" />
+          <ScalarProperty Name="AfiliadoId" ColumnName="AfiliadoId" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1,0 +1,30 @@
+boton derecho, actualizar modelo desde la base de datos, selecciono las tablas que quiero.
+website --> process --> bussiness --> data
+TODOS a Shared, que contiene las entities y el framework
+
+TODO
+cambiar el area registration por masters donde estan los abm de las entities
+Agregar las entities necesarias excepto las de los turnos que se manejan diferente,
+Desacoplar lo existente, agregar la bll para que lleve los datos
+Agregar lo models?
+
+PARA EL 20/09
+Agregar estilos abm
+Dibujar como seria la toma de turnos. - DONE
+Agregar la partial view del home. - DONE
+Separar a process - DONE
+Agregar las Routes - DONE (Falta ayuda para agregar a las áreas)
+
+
+PARA EL 4/10
+Terminar de agregar cacheo - DONE
+Empezar con la toma de turnos
+Agregar routes a areas - NOT YET
+Agregar los abm con estilos - DONE
+Agregar barra de busqueda - DONE
+Implementar tooltip y bootstrap - DONE IN PROFESIONAL AND AFILIADO BUT NOT FULLY IMPLEMENTED
+
+DUDAS
+Como llamar al cache a la fuerza?
+Autocomplete no funciona - no puedo instalar la version 1.12.4
+Como crear afiliados y profesionales sin los campos de auditoría.

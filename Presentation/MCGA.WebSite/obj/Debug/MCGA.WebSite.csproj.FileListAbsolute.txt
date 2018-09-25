@@ -413,3 +413,7 @@ C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\MCGA.Framework.pdb
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\MCGA.UI.Process.pdb
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\Boilerplate.Web.Mvc5.dll
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\Boilerplate.Web.Mvc5.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.Mvc.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.Mvc.xml

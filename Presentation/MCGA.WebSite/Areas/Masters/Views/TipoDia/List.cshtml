@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MCGA.Entities.TipoDia>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<link href="https://getbootstrap.com/docs/3.3/assets/css/docs.min.css" rel="stylesheet" />
+
+<h2>Días</h2>
+
+<div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+    <h4>Implementación de Autocomplete jquery-ui</h4> <p>
+        Enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering. <code>https://jqueryui.com/autocomplete/</code>
+        <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Autocomplete"
+                data-content="Enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        </button>
+    </p>
+</div>
+<div class="_form-horizontal">
+    <div class="form-group">
+        <label for="DiaName" class="control-label col-md-2">Dia</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="DiaName" name="DiaName" type="text" value="" placeholder="Ingrese las primeras letras del dia" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="DiaName" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="diaId" class="control-label col-md-2">Dia Id</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="diaId" type="text" readonly="readonly" />
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#DiaName").autocomplete({
+            autoSelect: true,
+            autoFocus: true,
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetDias", "TipoDia")',
+                    datatype: "json",
+                    data: { Areas: '', term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.descripcion, value: val.descripcion, Id: val.Id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#diaId").val(ui.item.Id);
+            }
+        });
+    </script>
+}

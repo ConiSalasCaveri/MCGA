@@ -11,5 +11,6 @@ namespace MCGA.WebSite.Constants.TipoDocumentoController
         public const string GetUpdate = ControllerName.Home + "GetUpdate";
         public const string GetDelete = ControllerName.Home + "GetDelete";
         public const string GetEntity = ControllerName.Home + "GetEntity";
+        public const string GetEntities = ControllerName.Home + "GetEntities";
     }
 }

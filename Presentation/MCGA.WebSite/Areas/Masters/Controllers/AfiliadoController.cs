@@ -1,7 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using MCGA.WebSite.Constants.AfiliadoController;
+using PagedList;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -11,12 +15,42 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private TipoDocumentoProcess tipoDocumentoComponent = new TipoDocumentoProcess();
         private TipoSexoProcess tipoSexoComponent = new TipoSexoProcess();
         // GET: Masters/Afiliado
+
+        [Route("vertodos", Name = AfiliadoControllerRoute.GetEntities)]
         public ActionResult Index()
         {            
             return View(component.Get());
         }
 
+        public ActionResult ListBase()
+        {
+            return View(component.Get().OrderBy(x => x.Nombre).ToList());
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<Afiliado> afiliados = component.Get();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                afiliados = afiliados
+                    .Where(s => s.Nombre.ToLower().Contains(searchString.ToLower()) ||
+                           s.Apellido.ToLower().Contains(searchString.ToLower()));
+            }
+            afiliados = afiliados.OrderBy(o => o.Nombre);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(afiliados.ToPagedList(pageNumber, pageSize));
+        }
+
         // GET: Masters/Afiliado/Details/5
+        [Route("verdetalle", Name = AfiliadoControllerRoute.GetEntity)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -32,6 +66,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Afiliado/Create        
+        [Route("Nuevo", Name = AfiliadoControllerRoute.GetCreate)]
         public ActionResult Create()
         {
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion");
@@ -57,6 +92,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Afiliado/Edit/5
+        [Route("actualizar", Name = AfiliadoControllerRoute.GetUpdate)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +127,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Afiliado/Delete/5
+        [Route("eliminar", Name = AfiliadoControllerRoute.GetDelete)]
         public ActionResult Delete(int? id)
         {
             if (id == null)

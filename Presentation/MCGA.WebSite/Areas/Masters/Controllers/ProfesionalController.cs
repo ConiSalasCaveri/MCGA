@@ -1,7 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using WebApplication1.Services.Cache;
+using PagedList;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -14,7 +18,35 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // GET: Masters/Profesional
         public ActionResult Index()
         {            
-            return View(component.Get());
+            var list = DataCache.Instance.ProfesionalList();
+            return View(list);
+        }
+
+        public ActionResult ListBase()
+        {            
+            return View(component.Get().OrderBy(x => x.Nombre).ToList());
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<Profesional> profesionales = component.Get();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                profesionales = profesionales
+                    .Where(s => s.Nombre.ToLower().Contains(searchString.ToLower()) || 
+                           s.Apellido.ToLower().Contains(searchString.ToLower()));
+            }
+            profesionales = profesionales.OrderBy(o => o.Nombre);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(profesionales.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Masters/Profesional/Details/5

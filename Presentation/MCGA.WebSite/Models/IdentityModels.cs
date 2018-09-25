@@ -45,5 +45,7 @@ namespace MCGA.WebSite.Models
         public System.Data.Entity.DbSet<MCGA.Entities.Agenda> Agenda { get; set; }
 
         public System.Data.Entity.DbSet<MCGA.Entities.TipoReseva> TipoResevas { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Turno> Turnoes { get; set; }
     }
 }

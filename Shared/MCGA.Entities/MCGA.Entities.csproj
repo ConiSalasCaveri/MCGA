@@ -50,6 +50,15 @@
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
     <Compile Include="IEntity.cs" />
+    <Compile Include="Meta\AfiliadoMetadata.cs" />
+    <Compile Include="Meta\AgendaMetadata.cs" />
+    <Compile Include="Meta\EspecialidadMetadata.cs" />
+    <Compile Include="Meta\ProfesionalMetadata.cs" />
+    <Compile Include="Meta\TipoDiaMetadata.cs" />
+    <Compile Include="Meta\TipoDocumentoMetadata.cs" />
+    <Compile Include="Meta\TipoReservaMetadata.cs" />
+    <Compile Include="Meta\TipoSexoMetadata.cs" />
+    <Compile Include="Meta\TurnoMetadata.cs" />
     <Compile Include="ModelMedicure.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +78,9 @@
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoSexo.cs">
+      <DependentUpon>ModelMedicure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Turno.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
   </ItemGroup>

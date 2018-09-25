@@ -14,6 +14,12 @@ namespace MCGA.Entities
     
     public partial class Afiliado
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Afiliado()
+        {
+            this.Turno = new HashSet<Turno>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -24,20 +30,22 @@ namespace MCGA.Entities
         public string Email { get; set; }
         public int TipoSexoId { get; set; }
         public System.DateTime FechaNacimiento { get; set; }
-        public int EstadoCivilId { get; set; }
+        public Nullable<int> EstadoCivilId { get; set; }
         public string NumeroAfiliado { get; set; }
-        public int PlanId { get; set; }
+        public Nullable<int> PlanId { get; set; }
         public string Foto { get; set; }
         public bool Habilitado { get; set; }
-        public System.DateTime createdon { get; set; }
+        public Nullable<System.DateTime> createdon { get; set; }
         public string createdby { get; set; }
-        public System.DateTime changedon { get; set; }
+        public Nullable<System.DateTime> changedon { get; set; }
         public string changedby { get; set; }
         public Nullable<System.DateTime> deletedon { get; set; }
         public string deletedby { get; set; }
-        public bool isdeleted { get; set; }
+        public Nullable<bool> isdeleted { get; set; }
     
         public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual TipoSexo TipoSexo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Turno> Turno { get; set; }
     }
 }

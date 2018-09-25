@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using WebApplication1.Services.Cache;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -12,7 +13,8 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // GET: Masters/TipoDocumento
         public ActionResult Index()
         {
-            return View(component.Get());
+            var list = DataCache.Instance.TipoDocumentoList();
+            return View(list);
         }
 
         // GET: Masters/TipoDocumento/Details/5

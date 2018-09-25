@@ -1,4 +1,5 @@
-﻿using MCGA.Data;
+﻿
+using MCGA.Data;
 using MCGA.Entities;
 using System.Collections.Generic;
 using System.Data.Entity;

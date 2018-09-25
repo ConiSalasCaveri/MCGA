@@ -1,6 +1,6 @@
 ﻿@model MCGA.Entities.Profesional
     <div>
-        <h4>Profesional</h4>
+        <h4>Profesionales</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -75,7 +75,7 @@
                 @Html.DisplayFor(model => model.Matricula)
             </dd>
     
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.Foto)
             </dt>
     
@@ -137,11 +137,11 @@
     
             <dd>
                 @Html.DisplayFor(model => model.isdeleted)
-            </dd>
+            </dd>*@
     
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver", "Index")
     </p>

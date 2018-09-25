@@ -1,0 +1,176 @@
+﻿@*@model IEnumerable<MCGA.Entities.Afiliado>*@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MCGA.Entities.Afiliado>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Afiliados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("List", "Afiliado", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Ingrese nombre o apellido del afiliado", style = "width:350px; display: inline-block;" })
+        <input type="submit" value="Buscar" class="btn btn-info" />
+    </p>
+}
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            <span data-toggle="tooltip" data-placement="top" title="Nombre del profesional">@Html.Raw("Nombre")</span>
+        </th>
+        <th>
+            @Html.Raw("Apellido")
+        </th>
+        <th>
+            @Html.Raw("Documento")
+        </th>
+        <th>
+            @Html.Raw("Numero")
+        </th>
+        <th>
+            @Html.Raw("Direccion")
+        </th>
+        <th>
+            @Html.Raw("Telefono")
+        </th>
+        <th>
+            @Html.Raw("Género")
+        </th>
+        <th>
+            @Html.Raw("Mail")
+        </th>
+        <th>
+            @Html.Raw("Fecha nac.")
+        </th>
+        <th>
+            @Html.Raw("Afiliado")
+        </th>
+        <th>
+            @Html.Raw("Habilitado")
+        </th>
+        <th></th>
+    </tr>
+    @*<th>
+            @Html.DisplayNameFor(model => model.EstadoCivilId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlanId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Foto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changedon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletedon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isdeleted)
+        </th>*@
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDocumento.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoSexo.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroAfiliado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habilitado)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.EstadoCivilId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlanId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdby)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.changedon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.changedby)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.deletedon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.deletedby)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isdeleted)
+                </td>*@
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Operaciones
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                        </li>
+                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</li>
+                        <li role="separator" class="divider"></li>
+                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("List", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -10,6 +10,7 @@ namespace MCGA.WebSite.Constants.EspecialidadController
         public const string Create = "Create";
         public const string Update = "Update";
         public const string Delete = "Delete";
-        public const string GetEntity = "GetEntity";
+        public const string Entities = "Entities";
+        public const string Entity = "Entity";
     }
 }

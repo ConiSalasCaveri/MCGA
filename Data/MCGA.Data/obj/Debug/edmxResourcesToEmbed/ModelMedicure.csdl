@@ -33,6 +33,11 @@
       <End Role="TipoDocumento" EntitySet="TipoDocumento" />
       <End Role="Profesional" EntitySet="Profesional" />
     </AssociationSet>
+    <EntitySet Name="Turno" EntityType="MedicureModel.Turno" />
+    <AssociationSet Name="FK__Turnos__afiliado__797309D9" Association="MedicureModel.FK__Turnos__afiliado__797309D9">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Afiliado">
     <Key>
@@ -48,20 +53,21 @@
     <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="TipoSexoId" Type="Int32" Nullable="false" />
     <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="EstadoCivilId" Type="Int32" Nullable="false" />
+    <Property Name="EstadoCivilId" Type="Int32" />
     <Property Name="NumeroAfiliado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PlanId" Type="Int32" Nullable="false" />
+    <Property Name="PlanId" Type="Int32" />
     <Property Name="Foto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-    <Property Name="createdon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="createdon" Type="DateTime" Precision="7" />
     <Property Name="createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="changedon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="changedon" Type="DateTime" Precision="7" />
     <Property Name="changedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="deletedon" Type="DateTime" Precision="7" />
     <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="isdeleted" Type="Boolean" Nullable="false" />
+    <Property Name="isdeleted" Type="Boolean" />
     <NavigationProperty Name="TipoDocumento" Relationship="MedicureModel.FK_Afiliado_TipoDocumento" FromRole="Afiliado" ToRole="TipoDocumento" />
     <NavigationProperty Name="TipoSexo" Relationship="MedicureModel.FK_Afiliado_TipoSexo" FromRole="Afiliado" ToRole="TipoSexo" />
+    <NavigationProperty Name="Turno" Relationship="MedicureModel.FK__Turnos__afiliado__797309D9" FromRole="Afiliado" ToRole="Turno" />
   </EntityType>
   <EntityType Name="Agenda">
     <Key>
@@ -107,13 +113,13 @@
     <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Matricula" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Foto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="createdon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="createdon" Type="DateTime" Precision="7" />
     <Property Name="createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="changedon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="changedon" Type="DateTime" Precision="7" />
     <Property Name="changedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="deletedon" Type="DateTime" Precision="7" />
     <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="isdeleted" Type="Boolean" Nullable="false" />
+    <Property Name="isdeleted" Type="Boolean" />
     <NavigationProperty Name="TipoDocumento" Relationship="MedicureModel.FK_Profesional_TipoDocumento" FromRole="Profesional" ToRole="TipoDocumento" />
   </EntityType>
   <EntityType Name="TipoDocumento">
@@ -185,6 +191,38 @@
       </Principal>
       <Dependent Role="Profesional">
         <PropertyRef Name="TipoDocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Turno">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Hora" Type="Time" Nullable="false" Precision="0" />
+    <Property Name="AfiliadoId" Type="Int32" Nullable="false" />
+    <Property Name="EspecialidadProfesionalId" Type="Int32" Nullable="false" />
+    <Property Name="reserva" Type="Int32" Nullable="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="createdon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="changedon" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="changedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="deletedon" Type="DateTime" Precision="7" />
+    <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="isdeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Afiliado" Relationship="MedicureModel.FK__Turnos__afiliado__797309D9" FromRole="Turno" ToRole="Afiliado" />
+  </EntityType>
+  <Association Name="FK__Turnos__afiliado__797309D9">
+    <End Type="MedicureModel.Afiliado" Role="Afiliado" Multiplicity="1" />
+    <End Type="MedicureModel.Turno" Role="Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="AfiliadoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

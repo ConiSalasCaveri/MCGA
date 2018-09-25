@@ -14,18 +14,18 @@
     <Property Name="Email" Type="nvarchar" MaxLength="255" />
     <Property Name="TipoSexoId" Type="int" Nullable="false" />
     <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
-    <Property Name="EstadoCivilId" Type="int" Nullable="false" />
+    <Property Name="EstadoCivilId" Type="int" />
     <Property Name="NumeroAfiliado" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="PlanId" Type="int" Nullable="false" />
+    <Property Name="PlanId" Type="int" />
     <Property Name="Foto" Type="nvarchar" MaxLength="255" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
-    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdon" Type="datetime2" Precision="7" />
     <Property Name="createdby" Type="nvarchar" MaxLength="100" />
-    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedon" Type="datetime2" Precision="7" />
     <Property Name="changedby" Type="nvarchar" MaxLength="100" />
     <Property Name="deletedon" Type="datetime2" Precision="7" />
     <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
-    <Property Name="isdeleted" Type="bit" Nullable="false" />
+    <Property Name="isdeleted" Type="bit" />
   </EntityType>
   <EntityType Name="Agenda">
     <Key>
@@ -70,13 +70,13 @@
     <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
     <Property Name="Matricula" Type="nvarchar" MaxLength="255" />
     <Property Name="Foto" Type="nvarchar" MaxLength="255" />
-    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdon" Type="datetime2" Precision="7" />
     <Property Name="createdby" Type="nvarchar" MaxLength="100" />
-    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedon" Type="datetime2" Precision="7" />
     <Property Name="changedby" Type="nvarchar" MaxLength="100" />
     <Property Name="deletedon" Type="datetime2" Precision="7" />
     <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
-    <Property Name="isdeleted" Type="bit" Nullable="false" />
+    <Property Name="isdeleted" Type="bit" />
   </EntityType>
   <EntityType Name="TipoDia">
     <Key>
@@ -106,6 +106,37 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="Turno">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Hora" Type="time" Precision="0" Nullable="false" />
+    <Property Name="AfiliadoId" Type="int" Nullable="false" />
+    <Property Name="EspecialidadProfesionalId" Type="int" Nullable="false" />
+    <Property Name="reserva" Type="int" Nullable="false" />
+    <Property Name="Observaciones" Type="text" />
+    <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+    <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="deletedon" Type="datetime2" Precision="7" />
+    <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
+    <Property Name="isdeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Turnos__afiliado__797309D9">
+    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
+    <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Afiliado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Turno">
+        <PropertyRef Name="AfiliadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Afiliado_TipoDocumento">
     <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
     <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
@@ -163,6 +194,11 @@
     <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoReseva" EntityType="Self.TipoReseva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Turnos__afiliado__797309D9" Association="Self.FK__Turnos__afiliado__797309D9">
+      <End Role="Afiliado" EntitySet="Afiliado" />
+      <End Role="Turno" EntitySet="Turno" />
+    </AssociationSet>
     <AssociationSet Name="FK_Afiliado_TipoDocumento" Association="Self.FK_Afiliado_TipoDocumento">
       <End Role="TipoDocumento" EntitySet="TipoDocumento" />
       <End Role="Afiliado" EntitySet="Afiliado" />

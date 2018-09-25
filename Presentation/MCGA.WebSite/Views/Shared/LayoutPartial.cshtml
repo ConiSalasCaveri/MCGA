@@ -1,4 +1,5 @@
-﻿@if (Request.IsAuthenticated)
+﻿
+@if (Request.IsAuthenticated)
 {
     <li class="nav navbar-nav">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="color: white;">
@@ -14,7 +15,7 @@
         <li>@Html.ActionLink("Profesional", "Index", "Masters/Profesional")</li>
         <li>@Html.ActionLink("Especialidad", "Index", "Masters/Especialidad")</li>
         <li>@Html.ActionLink("Agenda", "Index", "Masters/Agenda")</li>
-        <li>@Html.ActionLink("Afiliado", "Index", "Masters/Afiliado")</li>
+        <li>@Html.ActionLink("Afiliado", "Index", "Afiliado")</li>
         <li><a href="#">Médicos</a></li>
         <li class="divider"></li>
     </ul>

@@ -25,13 +25,13 @@ namespace MCGA.Entities
         public System.DateTime FechaNacimiento { get; set; }
         public string Matricula { get; set; }
         public string Foto { get; set; }
-        public System.DateTime createdon { get; set; }
+        public Nullable<System.DateTime> createdon { get; set; }
         public string createdby { get; set; }
-        public System.DateTime changedon { get; set; }
+        public Nullable<System.DateTime> changedon { get; set; }
         public string changedby { get; set; }
         public Nullable<System.DateTime> deletedon { get; set; }
         public string deletedby { get; set; }
-        public bool isdeleted { get; set; }
+        public Nullable<bool> isdeleted { get; set; }
     
         public virtual TipoDocumento TipoDocumento { get; set; }
     }
