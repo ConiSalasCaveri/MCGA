@@ -1,0 +1,40 @@
+﻿@model MCGA.Entities.Plan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h4>Plan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_bono_consulta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_bono_consulta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_bono_farmacia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_bono_farmacia)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver al listado", "List")
+</p>

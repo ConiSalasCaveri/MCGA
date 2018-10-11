@@ -1,0 +1,117 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MCGA.Entities.Turno>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Turnos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm("List", "Turno", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Ingrese nombre o apellido del afiliado", style = "width:350px; display: inline-block;" })
+        <input type="submit" value="Buscar" class="btn btn-info" />
+    </p>
+}
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            @Html.Raw("Afiliado")
+        </th>
+        <th>
+            @Html.Raw("Fecha")
+        </th>
+        <th>
+            @Html.Raw("Hora")
+        </th>
+        <th>
+            @Html.Raw("Especialidad")
+        </th>
+        <th>
+            @Html.Raw("Reserva")
+        </th>
+        <th>
+            @Html.Raw("Observaciones")
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.createdon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changedon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.changedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletedon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isdeleted)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Afiliado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EspecialidadProfesionalId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reserva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.createdon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdby)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.changedon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.changedby)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deletedon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deletedby)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isdeleted)
+            </td>*@
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </td>
+        </tr>
+    }
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("List", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

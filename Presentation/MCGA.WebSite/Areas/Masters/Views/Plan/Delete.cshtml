@@ -1,0 +1,45 @@
+﻿@model MCGA.Entities.Plan
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro que desea elimnar el plan?</h3>
+<div>
+    <h4>Plan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_bono_consulta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_bono_consulta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_bono_farmacia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_bono_farmacia)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al listado", "List")
+        </div>
+    }
+</div>

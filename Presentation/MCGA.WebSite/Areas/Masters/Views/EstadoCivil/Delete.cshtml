@@ -1,0 +1,31 @@
+﻿@model MCGA.Entities.EstadoCivil
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>¿Esta seguro que desea eliminar el estado civil?</h3>
+<div>
+    <h4>Estado Civil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al listado", "Index")
+        </div>
+    }
+</div>
