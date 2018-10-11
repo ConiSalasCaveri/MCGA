@@ -33,8 +33,10 @@ namespace MCGA.WebSite
             // Ignore the humans.txt file.
             routes.IgnoreRoute("humans.txt");
 
+           // AreaRegistration.RegisterAllAreas();
             // Enable attribute routing.
             routes.MapMvcAttributeRoutes();
+
 
             routes.MapRoute(
                 name: "Default",

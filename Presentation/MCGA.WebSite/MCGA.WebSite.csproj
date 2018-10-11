@@ -209,9 +209,12 @@
     <Compile Include="Areas\Masters\Controllers\AfiliadoController.cs" />
     <Compile Include="Areas\Masters\Controllers\AgendaController.cs" />
     <Compile Include="Areas\Masters\Controllers\EspecialidadController.cs" />
+    <Compile Include="Areas\Masters\Controllers\EstadoCivilController.cs" />
+    <Compile Include="Areas\Masters\Controllers\PlanController.cs" />
     <Compile Include="Areas\Masters\Controllers\ProfesionalController.cs" />
     <Compile Include="Areas\Masters\Controllers\TipoDiaController.cs" />
     <Compile Include="Areas\Masters\Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Areas\Masters\Controllers\TipoEspecialidadController.cs" />
     <Compile Include="Areas\Masters\Controllers\TipoResevaController.cs" />
     <Compile Include="Areas\Masters\Controllers\TipoSexoController.cs" />
     <Compile Include="Areas\Masters\Controllers\TurnoController.cs" />
@@ -360,11 +363,27 @@
     <Content Include="Areas\Masters\Views\Turno\Details.cshtml" />
     <Content Include="Areas\Masters\Views\Turno\Edit.cshtml" />
     <Content Include="Areas\Masters\Views\Turno\Index.cshtml" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Areas\Masters\Views\Turno\List.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoEspecialidad\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoEspecialidad\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoEspecialidad\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoEspecialidad\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\TipoEspecialidad\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Plan\List.cshtml" />
+    <Content Include="Areas\Masters\Views\EstadoCivil\Create.cshtml" />
+    <Content Include="Areas\Masters\Views\EstadoCivil\Delete.cshtml" />
+    <Content Include="Areas\Masters\Views\EstadoCivil\Details.cshtml" />
+    <Content Include="Areas\Masters\Views\EstadoCivil\Edit.cshtml" />
+    <Content Include="Areas\Masters\Views\EstadoCivil\Index.cshtml" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -424,8 +443,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\MCGA.Entities\MCGA.Entities.csproj">

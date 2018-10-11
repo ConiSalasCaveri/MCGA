@@ -35,5 +35,9 @@ namespace MCGA.Data
         public virtual DbSet<TipoReseva> TipoReseva { get; set; }
         public virtual DbSet<TipoSexo> TipoSexo { get; set; }
         public virtual DbSet<Turno> Turno { get; set; }
+        public virtual DbSet<EspecialidadesProfesional> EspecialidadesProfesional { get; set; }
+        public virtual DbSet<Plan> Plan { get; set; }
+        public virtual DbSet<TipoEspecialidad> TipoEspecialidad { get; set; }
+        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
     }
 }

@@ -96,10 +96,15 @@ namespace WebApplication1.Services.Cache
                 DataCacheSetting.Clasificador.SlidingExpiration);
             return lista;
         }
+
+        public void Clear()
+        {
+            _cacheService.Clear();
+        }
         public IList<TipoSexo> TipoSexoList()
         {
 
-            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDia.Key, () =>
+            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoSexo.Key, () =>
             {
                 TipoSexoProcess component = new TipoSexoProcess();
                 return (component.Get());
@@ -110,7 +115,7 @@ namespace WebApplication1.Services.Cache
         public IList<TipoReseva> TipoReservaList()
         {
 
-            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDia.Key, () =>
+            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoReserva.Key, () =>
             {
                 TipoReservaProcess component = new TipoReservaProcess();
                 return (component.Get());
@@ -121,7 +126,7 @@ namespace WebApplication1.Services.Cache
         public IList<TipoDocumento> TipoDocumentoList()
         {
 
-            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDia.Key, () =>
+            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDocumento.Key, () =>
             {
                 TipoDocumentoProcess component = new TipoDocumentoProcess();
                 return (component.Get());
@@ -132,7 +137,7 @@ namespace WebApplication1.Services.Cache
         public IList<Profesional> ProfesionalList()
         {
 
-            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDia.Key, () =>
+            var lista = _cacheService.GetOrAdd(DataCacheSetting.Profesional.Key, () =>
             {
                 ProfesionalProcess component = new ProfesionalProcess();
                 return (component.Get());
@@ -143,7 +148,7 @@ namespace WebApplication1.Services.Cache
         public IList<Especialidad> EspecialidadList()
         {
 
-            var lista = _cacheService.GetOrAdd(DataCacheSetting.TipoDia.Key, () =>
+            var lista = _cacheService.GetOrAdd(DataCacheSetting.Especialidad.Key, () =>
             {
                 EspecialidadProcess component = new EspecialidadProcess();
                 return (component.Get());

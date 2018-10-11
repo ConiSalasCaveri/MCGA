@@ -18,13 +18,22 @@ Agregar las Routes - DONE (Falta ayuda para agregar a las áreas)
 
 PARA EL 4/10
 Terminar de agregar cacheo - DONE
-Empezar con la toma de turnos
+Empezar con la toma de turnos - STARTED
 Agregar routes a areas - NOT YET
 Agregar los abm con estilos - DONE
 Agregar barra de busqueda - DONE
 Implementar tooltip y bootstrap - DONE IN PROFESIONAL AND AFILIADO BUT NOT FULLY IMPLEMENTED
+Como llamar al cache a la fuerza? - DONE
 
 DUDAS
-Como llamar al cache a la fuerza?
 Autocomplete no funciona - no puedo instalar la version 1.12.4
 Como crear afiliados y profesionales sin los campos de auditoría.
+Preguntar si se puede cambiar el modelo de base de datos
+
+dos tablas y a partir de ahi hacer el abm, implementar el autocomplete. paginado
+usar entity framework
+
+PARA EL 11/10 - 18/10
+Llenar campos de auditoria
+Terminar ABM
+Avanzar con turnos

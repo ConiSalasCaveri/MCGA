@@ -47,5 +47,11 @@ namespace MCGA.WebSite.Models
         public System.Data.Entity.DbSet<MCGA.Entities.TipoReseva> TipoResevas { get; set; }
 
         public System.Data.Entity.DbSet<MCGA.Entities.Turno> Turnoes { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.Plan> Plans { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.TipoEspecialidad> TipoEspecialidads { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.EstadoCivil> EstadoCivils { get; set; }
     }
 }

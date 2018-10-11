@@ -15,13 +15,18 @@ namespace MCGA.Business
 
         public void Create(Profesional entity)
         {
+            entity.createdon = DateTime.Now;
+            entity.isdeleted = false;
             db.Profesional.Add(entity);
             db.SaveChanges();
         }
 
         public void Delete(Profesional entity)
         {
-            db.Profesional.Remove(entity);
+            entity.deletedon = DateTime.Now;
+            entity.isdeleted = true;
+            db.Entry(entity).State = EntityState.Modified;
+            // db.Profesional.Remove(entity);
             db.SaveChanges();
         }
 
@@ -43,6 +48,7 @@ namespace MCGA.Business
 
         public void Update(Profesional entity)
         {
+            entity.changedon = DateTime.Now;
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }

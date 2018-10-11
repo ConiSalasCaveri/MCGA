@@ -6,6 +6,7 @@ using MCGA.Entities;
 using MCGA.UI.Process;
 using WebApplication1.Services.Cache;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -19,12 +20,19 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         public ActionResult Index()
         {            
             var list = DataCache.Instance.ProfesionalList();
-            return View(list);
+            return View(list                
+                .Where(x => x.isdeleted == false)
+                .OrderBy(x => x.Nombre)
+                .ToList());
         }
 
         public ActionResult ListBase()
         {            
-            return View(component.Get().OrderBy(x => x.Nombre).ToList());
+            return View(component
+                .Get()
+                .Where(x => x.isdeleted == false)
+                .OrderBy(x => x.Nombre)
+                .ToList());
         }
 
         public ActionResult List(string currentFilter, string searchString, int? page)
@@ -41,9 +49,13 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             {
                 profesionales = profesionales
                     .Where(s => s.Nombre.ToLower().Contains(searchString.ToLower()) || 
-                           s.Apellido.ToLower().Contains(searchString.ToLower()));
+                           s.Apellido.ToLower().Contains(searchString.ToLower()))
+                    .Where(x => x.isdeleted == false);
             }
-            profesionales = profesionales.OrderBy(o => o.Nombre);
+            profesionales = profesionales
+                .Where(x => x.isdeleted == false)
+                .OrderBy(o => o.Nombre);
+
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             return View(profesionales.ToPagedList(pageNumber, pageSize));
@@ -65,6 +77,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Profesional/Create
+       // [Route("Crearprofesional", Name = ProfesionalControllerRoute.GetCreate)]
         public ActionResult Create()
         {
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion");
@@ -76,12 +89,14 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,FechaNacimiento,Matricula,Foto,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Profesional profesional)
-        {
+        public ActionResult Create([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,FechaNacimiento,Matricula")] Profesional profesional)
+        {            
             if (ModelState.IsValid)
             {
+                profesional.createdby = User.Identity.GetUserId();
                 component.Create(profesional);
-                return RedirectToAction("Index");
+                DataCache.Instance.Clear();
+                return RedirectToAction("List");
             }
 
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
@@ -113,8 +128,10 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
+                profesional.changedby = User.Identity.GetUserId();
                 component.Update(profesional);
-                return RedirectToAction("Index");
+                DataCache.Instance.Clear();
+                return RedirectToAction("List");
             }
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
             return View(profesional);
@@ -141,8 +158,10 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var profesional = component.GetDetail(id);
+            profesional.deletedby = User.Identity.GetUserId();
             component.Delete(profesional);
-            return RedirectToAction("Index");
+            DataCache.Instance.Clear();
+            return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)

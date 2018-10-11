@@ -135,5 +135,51 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EspecialidadesProfesional">
+      <EntityTypeMapping TypeName="MedicureModel.EspecialidadesProfesional">
+        <MappingFragment StoreEntitySet="EspecialidadesProfesional">
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="ProfesionalId" ColumnName="ProfesionalId" />
+          <ScalarProperty Name="EspecialidadId" ColumnName="EspecialidadId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plan">
+      <EntityTypeMapping TypeName="MedicureModel.Plan">
+        <MappingFragment StoreEntitySet="Plan">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="precio_bono_farmacia" ColumnName="precio_bono_farmacia" />
+          <ScalarProperty Name="precio_bono_consulta" ColumnName="precio_bono_consulta" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEspecialidad">
+      <EntityTypeMapping TypeName="MedicureModel.TipoEspecialidad">
+        <MappingFragment StoreEntitySet="TipoEspecialidad">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCivil">
+      <EntityTypeMapping TypeName="MedicureModel.EstadoCivil">
+        <MappingFragment StoreEntitySet="EstadoCivil">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

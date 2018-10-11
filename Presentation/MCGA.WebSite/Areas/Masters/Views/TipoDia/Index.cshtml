@@ -2,7 +2,16 @@
 
 <h2>Días</h2>
 
-@*<div class="_form-horizontal">
+<div class="bs-callout bs-callout-warning" id="callout-dropdown-positioning">
+    <h4>Implementación de Autocomplete jquery-ui</h4> <p>
+        Enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering. <code>https://jqueryui.com/autocomplete/</code>
+        <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Autocomplete"
+                data-content="Enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        </button>
+    </p>
+</div>
+<div class="_form-horizontal">
     <div class="form-group">
         <label for="DiaName" class="control-label col-md-2">Dia</label>
         <div class="col-md-10">
@@ -17,7 +26,7 @@
         </div>
     </div>
 
-</div>*@
+</div>
 
 <p>
     @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
@@ -57,7 +66,7 @@
 
 </table>
 
-@*@section Scripts {
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $("#DiaName").autocomplete({
@@ -68,7 +77,7 @@
                 $.ajax({
                     url: '@Url.Action("GetDias", "TipoDia")',
                     datatype: "json",
-                    data: { Areas: '', term: request.term },
+                    data: { Areas: 'Masters', term: request.term },
                     success: function (data) {
                         response($.map(data, function (val, item) {
                             return { label: val.descripcion, value: val.descripcion, Id: val.Id };
@@ -81,4 +90,4 @@
             }
         });
     </script>
-}*@
+}

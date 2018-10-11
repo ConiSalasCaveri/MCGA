@@ -48,6 +48,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Create(tipoDocumento);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
 
@@ -79,6 +80,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Update(tipoDocumento);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
             return View(tipoDocumento);
@@ -106,6 +108,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             var tipoDocumento = component.GetDetail(id);
             component.Delete(tipoDocumento);
+            DataCache.Instance.Clear();
             return RedirectToAction("Index");
         }
 

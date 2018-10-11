@@ -1,25 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MCGA.Entities;
-using MCGA.WebSite.Models;
+using MCGA.UI.Process;
+using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
     public class TurnoController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private TurnoProcess process = new TurnoProcess();
+        private AfiliadoProcess afiliadoProcess = new AfiliadoProcess();
 
         // GET: Masters/Turno
         public ActionResult Index()
         {
-            var turnoes = db.Turnoes.Include(t => t.Afiliado);
-            return View(turnoes.ToList());
+            return View(process.Get());
+        }
+        public ActionResult ListBase()
+        {
+            return View(process.Get().OrderBy(x => x.Fecha).ToList());
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<Turno> turnos = process.Get();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                turnos = turnos
+                    .Where(s => s.Afiliado.Nombre.ToLower().Contains(searchString.ToLower()) ||
+                           s.Afiliado.Apellido.ToLower().Contains(searchString.ToLower()));
+            }
+            turnos = turnos.OrderBy(o => o.Fecha);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(turnos.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Masters/Turno/Details/5
@@ -29,7 +54,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Turno turno = db.Turnoes.Find(id);
+            var turno = process.GetDetail(id);
             if (turno == null)
             {
                 return HttpNotFound();
@@ -40,7 +65,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // GET: Masters/Turno/Create
         public ActionResult Create()
         {
-            ViewBag.AfiliadoId = new SelectList(db.Afiliadoes, "Id", "Nombre");
+            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre");
             return View();
         }
 
@@ -53,12 +78,12 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Turnoes.Add(turno);
-                db.SaveChanges();
+                turno.createdby = User.Identity.GetUserId();
+                process.Create(turno);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AfiliadoId = new SelectList(db.Afiliadoes, "Id", "Nombre", turno.AfiliadoId);
+            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
             return View(turno);
         }
 
@@ -69,12 +94,12 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Turno turno = db.Turnoes.Find(id);
+            var turno = process.GetDetail(id);
             if (turno == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AfiliadoId = new SelectList(db.Afiliadoes, "Id", "Nombre", turno.AfiliadoId);
+            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
             return View(turno);
         }
 
@@ -87,11 +112,10 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(turno).State = EntityState.Modified;
-                db.SaveChanges();
+                process.Update(turno);
                 return RedirectToAction("Index");
             }
-            ViewBag.AfiliadoId = new SelectList(db.Afiliadoes, "Id", "Nombre", turno.AfiliadoId);
+            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
             return View(turno);
         }
 
@@ -102,7 +126,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Turno turno = db.Turnoes.Find(id);
+            var turno = process.GetDetail(id);
             if (turno == null)
             {
                 return HttpNotFound();
@@ -115,19 +139,14 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Turno turno = db.Turnoes.Find(id);
-            db.Turnoes.Remove(turno);
-            db.SaveChanges();
+            var turno = process.GetDetail(id);
+            process.Delete(turno);
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            process.Dispose();
         }
     }
 }

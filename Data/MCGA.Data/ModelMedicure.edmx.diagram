@@ -19,6 +19,17 @@
         <AssociationConnector Association="MedicureModel.FK_Profesional_TipoDocumento" />
         <EntityTypeShape EntityType="MedicureModel.Turno" Width="1.5" PointX="8.25" PointY="5.125" />
         <AssociationConnector Association="MedicureModel.FK__Turnos__afiliado__797309D9" />
+        <EntityTypeShape EntityType="MedicureModel.EspecialidadesProfesional" Width="1.5" PointX="8.25" PointY="10.25" />
+        <EntityTypeShape EntityType="MedicureModel.Plan" Width="1.5" PointX="3.75" PointY="14.5" />
+        <EntityTypeShape EntityType="MedicureModel.TipoEspecialidad" Width="1.5" PointX="0.75" PointY="7" />
+        <AssociationConnector Association="MedicureModel.FK__Afiliados__plan___5629CD9C" />
+        <AssociationConnector Association="MedicureModel.FK_Agenda_EspecialidadesProfesional" />
+        <AssociationConnector Association="MedicureModel.FK__Especiali__TipoE__0C85DE4D" />
+        <AssociationConnector Association="MedicureModel.FK_EspecialidadesProfesional_Especialidad" />
+        <AssociationConnector Association="MedicureModel.FK__Especiali__profe__5FB337D6" />
+        <AssociationConnector Association="MedicureModel.FK_Turnos_EspecialidadesProfesional" />
+        <EntityTypeShape EntityType="MedicureModel.EstadoCivil" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="MedicureModel.FK__Afiliados__estad__5535A963" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -56,6 +56,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Create(tipoDia);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
 
@@ -87,6 +88,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Update(tipoDia);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
             return View(tipoDia);
@@ -114,6 +116,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             var tipoDia = component.GetDetail(id);
             component.Delete(tipoDia);
+            DataCache.Instance.Clear();
             return RedirectToAction("Index");
         }
 
@@ -125,12 +128,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult GetDias(string Areas, string term = "")
+        public JsonResult GetDias(string Areas, string term)
         {
-            var lista = component.Get();
-
-            lista.Where(x => x.descripcion.Contains(term))
-                 .OrderBy(x => x.Id).ToList();
+            var lista = component.GetAutocomplete(term);            
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }

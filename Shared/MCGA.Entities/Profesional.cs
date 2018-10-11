@@ -14,6 +14,12 @@ namespace MCGA.Entities
     
     public partial class Profesional
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Profesional()
+        {
+            this.EspecialidadesProfesional = new HashSet<EspecialidadesProfesional>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -34,5 +40,7 @@ namespace MCGA.Entities
         public Nullable<bool> isdeleted { get; set; }
     
         public virtual TipoDocumento TipoDocumento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EspecialidadesProfesional> EspecialidadesProfesional { get; set; }
     }
 }

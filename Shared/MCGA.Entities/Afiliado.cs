@@ -47,5 +47,7 @@ namespace MCGA.Entities
         public virtual TipoSexo TipoSexo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turno { get; set; }
+        public virtual Plan Plan { get; set; }
+        public virtual EstadoCivil EstadoCivil { get; set; }
     }
 }

@@ -14,9 +14,19 @@ namespace MCGA.Entities
     
     public partial class Especialidad
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Especialidad()
+        {
+            this.EspecialidadesProfesional = new HashSet<EspecialidadesProfesional>();
+        }
+    
         public int Id { get; set; }
         public string descripcion { get; set; }
-        public int frecuencia { get; set; }
-        public int TipoEspecialidadId { get; set; }
+        public Nullable<int> frecuencia { get; set; }
+        public Nullable<int> TipoEspecialidadId { get; set; }
+    
+        public virtual TipoEspecialidad TipoEspecialidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EspecialidadesProfesional> EspecialidadesProfesional { get; set; }
     }
 }

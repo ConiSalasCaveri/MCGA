@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCGA.Entities.Meta
+namespace MCGA.Entities
 {
     [MetadataType(typeof(TurnoMetadata))]
-    public partial class Afiliado
+    public partial class Turno
     {
         public class TurnoMetadata
         {

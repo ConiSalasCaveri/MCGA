@@ -48,6 +48,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Create(especialidad);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
 
@@ -79,6 +80,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Update(especialidad);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
             return View(especialidad);
@@ -106,6 +108,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             var especialidad = component.GetDetail(id);
             component.Delete(especialidad);
+            DataCache.Instance.Clear();
             return RedirectToAction("Index");
         }
 

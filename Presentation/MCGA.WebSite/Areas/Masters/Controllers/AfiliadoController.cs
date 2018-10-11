@@ -6,6 +6,7 @@ using MCGA.Entities;
 using MCGA.UI.Process;
 using MCGA.WebSite.Constants.AfiliadoController;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -14,9 +15,11 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private AfiliadoProcess component = new AfiliadoProcess();
         private TipoDocumentoProcess tipoDocumentoComponent = new TipoDocumentoProcess();
         private TipoSexoProcess tipoSexoComponent = new TipoSexoProcess();
+        private EstadoCivilProcess estadoCivilProcess = new EstadoCivilProcess();
+        private PlanProcess planProcess = new PlanProcess();
         // GET: Masters/Afiliado
 
-        [Route("vertodos", Name = AfiliadoControllerRoute.GetEntities)]
+        //[Route("vertodos", Name = AfiliadoControllerRoute.GetEntities)]
         public ActionResult Index()
         {            
             return View(component.Get());
@@ -50,7 +53,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Afiliado/Details/5
-        [Route("verdetalle", Name = AfiliadoControllerRoute.GetEntity)]
+       // [Route("verdetalle", Name = AfiliadoControllerRoute.GetEntity)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,11 +69,13 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         }
 
         // GET: Masters/Afiliado/Create        
-        [Route("Nuevo", Name = AfiliadoControllerRoute.GetCreate)]
+        //[Route("Nuevo", Name = AfiliadoControllerRoute.GetCreate)]
         public ActionResult Create()
         {
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion");
             ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion");
+            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
             return View();
         }
 
@@ -83,16 +88,19 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
+                afiliado.createdby = User.Identity.GetUserId();
                 component.Create(afiliado);
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
             ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
+            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
             return View(afiliado);
         }
 
         // GET: Masters/Afiliado/Edit/5
-        [Route("actualizar", Name = AfiliadoControllerRoute.GetUpdate)]
+       // [Route("actualizar", Name = AfiliadoControllerRoute.GetUpdate)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -106,6 +114,8 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             }            
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
             ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
+            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
             return View(afiliado);
         }
 
@@ -118,16 +128,19 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
+                afiliado.changedby = User.Identity.GetUserId();
                 component.Update(afiliado);
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }            
             ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
             ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
+            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
             return View(afiliado);
         }
 
         // GET: Masters/Afiliado/Delete/5
-        [Route("eliminar", Name = AfiliadoControllerRoute.GetDelete)]
+        //[Route("eliminar", Name = AfiliadoControllerRoute.GetDelete)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -148,8 +161,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var afiliado = component.GetDetail(id);
+            afiliado.deletedby = User.Identity.GetUserId();
             component.Delete(afiliado);
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)

@@ -9,3 +9,4 @@ C:\MCGA\MCGA\bin\MCGA.Framework.pdb
 C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.csproj.CoreCompileInputs.cache
 C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.dll
 C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.pdb
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Debug\MCGA.Framework.csprojAssemblyReference.cache

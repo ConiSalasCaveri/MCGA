@@ -15,13 +15,16 @@ namespace MCGA.Business
 
         public void Create(Afiliado entity)
         {
+            entity.createdon = DateTime.Now;
             db.Afiliado.Add(entity);
             db.SaveChanges();
         }
-//C:\MCGA\MCGA\Business\MCGA.Business\AfiliadoComponent.cs
         public void Delete(Afiliado entity)
         {
-            db.Afiliado.Remove(entity);
+            entity.deletedon = DateTime.Now;
+            // db.Afiliado.Remove(entity);
+            entity.isdeleted = true;
+            db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
 
@@ -43,8 +46,13 @@ namespace MCGA.Business
 
         public void Update(Afiliado entity)
         {
+            entity.changedon = DateTime.Now;
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
+        }
+        public DbSet SelectList()
+        {
+            return db.Afiliado;
         }
     }
 }

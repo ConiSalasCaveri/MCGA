@@ -49,10 +49,18 @@
     <Compile Include="Especialidad.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
+    <Compile Include="EspecialidadesProfesional.cs">
+      <DependentUpon>ModelMedicure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoCivil.cs">
+      <DependentUpon>ModelMedicure.tt</DependentUpon>
+    </Compile>
     <Compile Include="IEntity.cs" />
     <Compile Include="Meta\AfiliadoMetadata.cs" />
     <Compile Include="Meta\AgendaMetadata.cs" />
     <Compile Include="Meta\EspecialidadMetadata.cs" />
+    <Compile Include="Meta\EstadoCivilMetadata.cs" />
+    <Compile Include="Meta\PlanMetadata.cs" />
     <Compile Include="Meta\ProfesionalMetadata.cs" />
     <Compile Include="Meta\TipoDiaMetadata.cs" />
     <Compile Include="Meta\TipoDocumentoMetadata.cs" />
@@ -64,6 +72,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
+    <Compile Include="Plan.cs">
+      <DependentUpon>ModelMedicure.tt</DependentUpon>
+    </Compile>
     <Compile Include="Profesional.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
@@ -72,6 +83,9 @@
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoDocumento.cs">
+      <DependentUpon>ModelMedicure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoEspecialidad.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoReseva.cs">

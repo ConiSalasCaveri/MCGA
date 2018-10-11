@@ -58,8 +58,7 @@ namespace MCGA.Entities
             [DataType(DataType.Date)]
             public DateTime FechaNacimiento { get; set; }
 
-            [DisplayName("Tipo documento")]
-            [Required(ErrorMessage = "Requerido")]
+            [ScaffoldColumn(false)]            
             public TipoDocumento TipoDocumento { get; set; }
 
             [ScaffoldColumn(false)]            

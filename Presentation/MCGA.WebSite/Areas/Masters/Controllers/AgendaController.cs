@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using Microsoft.AspNet.Identity;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -48,6 +49,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
+                agenda.createdby = User.Identity.GetUserId();
                 component.Create(agenda);
                 return RedirectToAction("Index");
             }
@@ -81,6 +83,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             if (ModelState.IsValid)
             {
+                agenda.changedby = User.Identity.GetUserId();
                 component.Update(agenda);
                 return RedirectToAction("Index");
             }
@@ -109,6 +112,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var agenda = component.GetDetail(id);
+            agenda.deletedby = User.Identity.GetUserId();
             component.Delete(agenda);
             return RedirectToAction("Index");
         }

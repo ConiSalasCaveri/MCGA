@@ -45,5 +45,10 @@ namespace MCGA.UI.Process
         {
             return component.SelectList();
         }
+
+        public IList<TipoDia> GetAutocomplete(string filter)
+        {
+            return component.GetAutocomplete(filter);
+        }
     }
 }

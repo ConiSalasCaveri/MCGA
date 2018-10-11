@@ -47,5 +47,13 @@ namespace MCGA.Business
         {
             return db.TipoDia;
         }
+
+        public IList<TipoDia> GetAutocomplete(string filter = "")
+        {
+            return db.TipoDia
+                .Where(x => x.descripcion.Contains(filter))
+                .OrderBy(x => x.Id)
+                .ToList();
+        }
     }
 }

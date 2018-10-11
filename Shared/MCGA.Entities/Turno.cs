@@ -30,5 +30,6 @@ namespace MCGA.Entities
         public bool isdeleted { get; set; }
     
         public virtual Afiliado Afiliado { get; set; }
+        public virtual EspecialidadesProfesional EspecialidadesProfesional { get; set; }
     }
 }

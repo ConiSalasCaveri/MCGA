@@ -57,8 +57,43 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="frecuencia" Type="int" Nullable="false" />
-          <Property Name="TipoEspecialidadId" Type="int" Nullable="false" />
+          <Property Name="frecuencia" Type="int" />
+          <Property Name="TipoEspecialidadId" Type="int" />
+        </EntityType>
+        <EntityType Name="EspecialidadesProfesional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EspecialidadId" Type="int" Nullable="false" />
+          <Property Name="ProfesionalId" Type="int" Nullable="false" />
+          <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+          <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="precio_bono_consulta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="precio_bono_farmacia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="createdon" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="createdby" Type="nvarchar" MaxLength="100" />
+          <Property Name="changedon" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="changedby" Type="nvarchar" MaxLength="100" />
+          <Property Name="deletedon" Type="datetime2" Precision="7" />
+          <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
+          <Property Name="isdeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Profesional">
           <Key>
@@ -91,6 +126,13 @@
           <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -130,6 +172,54 @@
           <Property Name="deletedby" Type="nvarchar" MaxLength="100" />
           <Property Name="isdeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Afiliados__estad__5535A963">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="0..1" />
+          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Afiliado">
+              <PropertyRef Name="EstadoCivilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Afiliados__plan___5629CD9C">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="0..1" />
+          <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Afiliado">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__profe__5FB337D6">
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+          <End Role="EspecialidadesProfesional" Type="Self.EspecialidadesProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EspecialidadesProfesional">
+              <PropertyRef Name="ProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__TipoE__0C85DE4D">
+          <End Role="TipoEspecialidad" Type="Self.TipoEspecialidad" Multiplicity="0..1" />
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEspecialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Especialidad">
+              <PropertyRef Name="TipoEspecialidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Turnos__afiliado__797309D9">
           <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
@@ -166,6 +256,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Agenda_EspecialidadesProfesional">
+          <End Role="EspecialidadesProfesional" Type="Self.EspecialidadesProfesional" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadesProfesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EspecialidadProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Agenda_TipoDia">
           <End Role="TipoDia" Type="Self.TipoDia" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
@@ -175,6 +277,18 @@
             </Principal>
             <Dependent Role="Agenda">
               <PropertyRef Name="TipoDiaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadesProfesional_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="EspecialidadesProfesional" Type="Self.EspecialidadesProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EspecialidadesProfesional">
+              <PropertyRef Name="EspecialidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -190,16 +304,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Turnos_EspecialidadesProfesional">
+          <End Role="EspecialidadesProfesional" Type="Self.EspecialidadesProfesional" Multiplicity="1" />
+          <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadesProfesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="EspecialidadProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MedicureModelStoreContainer">
           <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EspecialidadesProfesional" EntityType="Self.EspecialidadesProfesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDia" EntityType="Self.TipoDia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEspecialidad" EntityType="Self.TipoEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoReseva" EntityType="Self.TipoReseva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Afiliados__estad__5535A963" Association="Self.FK__Afiliados__estad__5535A963">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Afiliado" EntitySet="Afiliado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Afiliados__plan___5629CD9C" Association="Self.FK__Afiliados__plan___5629CD9C">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Afiliado" EntitySet="Afiliado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__profe__5FB337D6" Association="Self.FK__Especiali__profe__5FB337D6">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__TipoE__0C85DE4D" Association="Self.FK__Especiali__TipoE__0C85DE4D">
+            <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
+            <End Role="Especialidad" EntitySet="Especialidad" />
+          </AssociationSet>
           <AssociationSet Name="FK__Turnos__afiliado__797309D9" Association="Self.FK__Turnos__afiliado__797309D9">
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Turno" EntitySet="Turno" />
@@ -212,13 +358,25 @@
             <End Role="TipoSexo" EntitySet="TipoSexo" />
             <End Role="Afiliado" EntitySet="Afiliado" />
           </AssociationSet>
+          <AssociationSet Name="FK_Agenda_EspecialidadesProfesional" Association="Self.FK_Agenda_EspecialidadesProfesional">
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
           <AssociationSet Name="FK_Agenda_TipoDia" Association="Self.FK_Agenda_TipoDia">
             <End Role="TipoDia" EntitySet="TipoDia" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadesProfesional_Especialidad" Association="Self.FK_EspecialidadesProfesional_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+          </AssociationSet>
           <AssociationSet Name="FK_Profesional_TipoDocumento" Association="Self.FK_Profesional_TipoDocumento">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
             <End Role="Profesional" EntitySet="Profesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_EspecialidadesProfesional" Association="Self.FK_Turnos_EspecialidadesProfesional">
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+            <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -263,6 +421,38 @@
             <End Role="Afiliado" EntitySet="Afiliado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
+          <EntitySet Name="EspecialidadesProfesional" EntityType="MedicureModel.EspecialidadesProfesional" />
+          <EntitySet Name="Plan" EntityType="MedicureModel.Plan" />
+          <EntitySet Name="TipoEspecialidad" EntityType="MedicureModel.TipoEspecialidad" />
+          <AssociationSet Name="FK__Afiliados__plan___5629CD9C" Association="MedicureModel.FK__Afiliados__plan___5629CD9C">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Afiliado" EntitySet="Afiliado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_EspecialidadesProfesional" Association="MedicureModel.FK_Agenda_EspecialidadesProfesional">
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__TipoE__0C85DE4D" Association="MedicureModel.FK__Especiali__TipoE__0C85DE4D">
+            <End Role="TipoEspecialidad" EntitySet="TipoEspecialidad" />
+            <End Role="Especialidad" EntitySet="Especialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspecialidadesProfesional_Especialidad" Association="MedicureModel.FK_EspecialidadesProfesional_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__profe__5FB337D6" Association="MedicureModel.FK__Especiali__profe__5FB337D6">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_EspecialidadesProfesional" Association="MedicureModel.FK_Turnos_EspecialidadesProfesional">
+            <End Role="EspecialidadesProfesional" EntitySet="EspecialidadesProfesional" />
+            <End Role="Turno" EntitySet="Turno" />
+          </AssociationSet>
+          <EntitySet Name="EstadoCivil" EntityType="MedicureModel.EstadoCivil" />
+          <AssociationSet Name="FK__Afiliados__estad__5535A963" Association="MedicureModel.FK__Afiliados__estad__5535A963">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Afiliado" EntitySet="Afiliado" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Afiliado">
           <Key>
@@ -293,6 +483,8 @@
           <NavigationProperty Name="TipoDocumento" Relationship="MedicureModel.FK_Afiliado_TipoDocumento" FromRole="Afiliado" ToRole="TipoDocumento" />
           <NavigationProperty Name="TipoSexo" Relationship="MedicureModel.FK_Afiliado_TipoSexo" FromRole="Afiliado" ToRole="TipoSexo" />
           <NavigationProperty Name="Turno" Relationship="MedicureModel.FK__Turnos__afiliado__797309D9" FromRole="Afiliado" ToRole="Turno" />
+          <NavigationProperty Name="Plan" Relationship="MedicureModel.FK__Afiliados__plan___5629CD9C" FromRole="Afiliado" ToRole="Plan" />
+          <NavigationProperty Name="EstadoCivil" Relationship="MedicureModel.FK__Afiliados__estad__5535A963" FromRole="Afiliado" ToRole="EstadoCivil" />
         </EntityType>
         <EntityType Name="Agenda">
           <Key>
@@ -313,6 +505,7 @@
           <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="isdeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TipoDia" Relationship="MedicureModel.FK_Agenda_TipoDia" FromRole="Agenda" ToRole="TipoDia" />
+          <NavigationProperty Name="EspecialidadesProfesional" Relationship="MedicureModel.FK_Agenda_EspecialidadesProfesional" FromRole="Agenda" ToRole="EspecialidadesProfesional" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -320,8 +513,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="frecuencia" Type="Int32" Nullable="false" />
-          <Property Name="TipoEspecialidadId" Type="Int32" Nullable="false" />
+          <Property Name="frecuencia" Type="Int32" />
+          <Property Name="TipoEspecialidadId" Type="Int32" />
+          <NavigationProperty Name="TipoEspecialidad" Relationship="MedicureModel.FK__Especiali__TipoE__0C85DE4D" FromRole="Especialidad" ToRole="TipoEspecialidad" />
+          <NavigationProperty Name="EspecialidadesProfesional" Relationship="MedicureModel.FK_EspecialidadesProfesional_Especialidad" FromRole="Especialidad" ToRole="EspecialidadesProfesional" />
         </EntityType>
         <EntityType Name="Profesional">
           <Key>
@@ -346,6 +541,7 @@
           <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="isdeleted" Type="Boolean" />
           <NavigationProperty Name="TipoDocumento" Relationship="MedicureModel.FK_Profesional_TipoDocumento" FromRole="Profesional" ToRole="TipoDocumento" />
+          <NavigationProperty Name="EspecialidadesProfesional" Relationship="MedicureModel.FK__Especiali__profe__5FB337D6" FromRole="Profesional" ToRole="EspecialidadesProfesional" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -438,6 +634,7 @@
           <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="isdeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Afiliado" Relationship="MedicureModel.FK__Turnos__afiliado__797309D9" FromRole="Turno" ToRole="Afiliado" />
+          <NavigationProperty Name="EspecialidadesProfesional" Relationship="MedicureModel.FK_Turnos_EspecialidadesProfesional" FromRole="Turno" ToRole="EspecialidadesProfesional" />
         </EntityType>
         <Association Name="FK__Turnos__afiliado__797309D9">
           <End Type="MedicureModel.Afiliado" Role="Afiliado" Multiplicity="1" />
@@ -448,6 +645,139 @@
             </Principal>
             <Dependent Role="Turno">
               <PropertyRef Name="AfiliadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EspecialidadesProfesional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EspecialidadId" Type="Int32" Nullable="false" />
+          <Property Name="ProfesionalId" Type="Int32" Nullable="false" />
+          <Property Name="createdon" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="changedon" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="changedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agenda" Relationship="MedicureModel.FK_Agenda_EspecialidadesProfesional" FromRole="EspecialidadesProfesional" ToRole="Agenda" />
+          <NavigationProperty Name="Especialidad" Relationship="MedicureModel.FK_EspecialidadesProfesional_Especialidad" FromRole="EspecialidadesProfesional" ToRole="Especialidad" />
+          <NavigationProperty Name="Profesional" Relationship="MedicureModel.FK__Especiali__profe__5FB337D6" FromRole="EspecialidadesProfesional" ToRole="Profesional" />
+          <NavigationProperty Name="Turno" Relationship="MedicureModel.FK_Turnos_EspecialidadesProfesional" FromRole="EspecialidadesProfesional" ToRole="Turno" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="precio_bono_consulta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="precio_bono_farmacia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="createdon" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="changedon" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="changedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="deletedon" Type="DateTime" Precision="7" />
+          <Property Name="deletedby" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="isdeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Afiliado" Relationship="MedicureModel.FK__Afiliados__plan___5629CD9C" FromRole="Plan" ToRole="Afiliado" />
+        </EntityType>
+        <EntityType Name="TipoEspecialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Especialidad" Relationship="MedicureModel.FK__Especiali__TipoE__0C85DE4D" FromRole="TipoEspecialidad" ToRole="Especialidad" />
+        </EntityType>
+        <Association Name="FK__Afiliados__plan___5629CD9C">
+          <End Type="MedicureModel.Plan" Role="Plan" Multiplicity="0..1" />
+          <End Type="MedicureModel.Afiliado" Role="Afiliado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Afiliado">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_EspecialidadesProfesional">
+          <End Type="MedicureModel.EspecialidadesProfesional" Role="EspecialidadesProfesional" Multiplicity="1" />
+          <End Type="MedicureModel.Agenda" Role="Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadesProfesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EspecialidadProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__TipoE__0C85DE4D">
+          <End Type="MedicureModel.TipoEspecialidad" Role="TipoEspecialidad" Multiplicity="0..1" />
+          <End Type="MedicureModel.Especialidad" Role="Especialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEspecialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Especialidad">
+              <PropertyRef Name="TipoEspecialidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspecialidadesProfesional_Especialidad">
+          <End Type="MedicureModel.Especialidad" Role="Especialidad" Multiplicity="1" />
+          <End Type="MedicureModel.EspecialidadesProfesional" Role="EspecialidadesProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EspecialidadesProfesional">
+              <PropertyRef Name="EspecialidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__profe__5FB337D6">
+          <End Type="MedicureModel.Profesional" Role="Profesional" Multiplicity="1" />
+          <End Type="MedicureModel.EspecialidadesProfesional" Role="EspecialidadesProfesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EspecialidadesProfesional">
+              <PropertyRef Name="ProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_EspecialidadesProfesional">
+          <End Type="MedicureModel.EspecialidadesProfesional" Role="EspecialidadesProfesional" Multiplicity="1" />
+          <End Type="MedicureModel.Turno" Role="Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspecialidadesProfesional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="EspecialidadProfesionalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Afiliado" Relationship="MedicureModel.FK__Afiliados__estad__5535A963" FromRole="EstadoCivil" ToRole="Afiliado" />
+        </EntityType>
+        <Association Name="FK__Afiliados__estad__5535A963">
+          <End Type="MedicureModel.EstadoCivil" Role="EstadoCivil" Multiplicity="0..1" />
+          <End Type="MedicureModel.Afiliado" Role="Afiliado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Afiliado">
+              <PropertyRef Name="EstadoCivilId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -587,6 +917,52 @@
                 <ScalarProperty Name="AfiliadoId" ColumnName="AfiliadoId" />
                 <ScalarProperty Name="Hora" ColumnName="Hora" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspecialidadesProfesional">
+            <EntityTypeMapping TypeName="MedicureModel.EspecialidadesProfesional">
+              <MappingFragment StoreEntitySet="EspecialidadesProfesional">
+                <ScalarProperty Name="changedby" ColumnName="changedby" />
+                <ScalarProperty Name="changedon" ColumnName="changedon" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="ProfesionalId" ColumnName="ProfesionalId" />
+                <ScalarProperty Name="EspecialidadId" ColumnName="EspecialidadId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plan">
+            <EntityTypeMapping TypeName="MedicureModel.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+                <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+                <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+                <ScalarProperty Name="changedby" ColumnName="changedby" />
+                <ScalarProperty Name="changedon" ColumnName="changedon" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="precio_bono_farmacia" ColumnName="precio_bono_farmacia" />
+                <ScalarProperty Name="precio_bono_consulta" ColumnName="precio_bono_consulta" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEspecialidad">
+            <EntityTypeMapping TypeName="MedicureModel.TipoEspecialidad">
+              <MappingFragment StoreEntitySet="TipoEspecialidad">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCivil">
+            <EntityTypeMapping TypeName="MedicureModel.EstadoCivil">
+              <MappingFragment StoreEntitySet="EstadoCivil">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

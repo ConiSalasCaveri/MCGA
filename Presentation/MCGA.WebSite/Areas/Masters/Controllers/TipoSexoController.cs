@@ -48,6 +48,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Create(tipoSexo);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
 
@@ -79,6 +80,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             if (ModelState.IsValid)
             {
                 component.Update(tipoSexo);
+                DataCache.Instance.Clear();
                 return RedirectToAction("Index");
             }
             return View(tipoSexo);
@@ -106,6 +108,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         {
             var tipoSexo = component.GetDetail(id);
             component.Delete(tipoSexo);
+            DataCache.Instance.Clear();
             return RedirectToAction("Index");
         }
 

@@ -2,6 +2,7 @@
 using MCGA.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,10 @@ namespace MCGA.UI.Process
         public void Update(Afiliado entity)
         {
             component.Update(entity);
+        }
+        public DbSet SelectList()
+        {
+            return component.SelectList();
         }
     }
 }

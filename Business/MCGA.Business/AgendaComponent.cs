@@ -3,6 +3,7 @@ using MCGA.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System;
 
 namespace MCGA.Business
 {
@@ -11,12 +12,13 @@ namespace MCGA.Business
         private MedicureContext db = new MedicureContext();
         public void Create(Agenda entity)
         {
+            entity.createdon = DateTime.Now;
             db.Agenda.Add(entity);
             db.SaveChanges();
         }
-//C:\MCGA\MCGA\Business\MCGA.Business\AgendaComponent.cs
         public void Delete(Agenda entity)
         {
+            entity.deletedon = DateTime.Now;
             db.Agenda.Remove(entity);
             db.SaveChanges();
         }
@@ -39,6 +41,7 @@ namespace MCGA.Business
 
         public void Update(Agenda entity)
         {
+            entity.changedon = DateTime.Now;
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
