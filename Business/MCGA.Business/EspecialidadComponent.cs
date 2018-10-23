@@ -33,6 +33,13 @@ namespace MCGA.Business
         {
             return db.Especialidad.ToList();
         }
+        public IList<Especialidad> GetAutocomplete(string filter = "")
+        {
+            return db.Especialidad
+                .Where(x => x.descripcion.Contains(filter))
+                .OrderBy(x => x.Id)
+                .ToList();
+        }
 
         public Especialidad GetDetail(int? id)
         {

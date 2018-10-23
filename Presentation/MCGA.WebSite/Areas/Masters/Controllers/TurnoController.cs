@@ -14,6 +14,8 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
     {
         private TurnoProcess process = new TurnoProcess();
         private AfiliadoProcess afiliadoProcess = new AfiliadoProcess();
+        private EspecialidadProcess especialidadProcess = new EspecialidadProcess();
+        private ProfesionalProcess profesionalProcess = new ProfesionalProcess();
 
         // GET: Masters/Turno
         public ActionResult Index()
@@ -147,6 +149,38 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         protected override void Dispose(bool disposing)
         {
             process.Dispose();
+        }
+
+        public ActionResult TomarTurno()
+        {
+            return View("TomarTurno");
+        }
+
+        public ActionResult TurnoEstudio()
+        {
+            return View("TurnoEstudio");
+        }
+
+        public ActionResult TurnoProfesional()
+        {
+            return View("TurnoProfesional");
+        }
+
+        public ActionResult ListaTurnos()
+        {
+            return View("ListaTurnos");
+        }
+        public JsonResult GetEspecialidades(string Areas, string term)
+        {
+            var lista = especialidadProcess.GetAutocomplete(term);
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetProfesionales(string Areas, string term)
+        {
+            var lista = profesionalProcess.GetAutocomplete(term);
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
     }
 }

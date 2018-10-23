@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "ListaTurnos";
+}
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/moment-with-locales.js"></script>
+
+@*<script src="~/Scripts/bootstrap.min.js"></script>*@
+
+<h2>ListaTurnos</h2>
+
+@*<div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    $('#datetimepicker1').datepicker({
+                        format: 'yyyy-mm-dd hh:ii',
+                        autoclose: true,
+                        todayBtn: true,
+                        startDate: date
+                    });
+
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class='input-group date'>
+        <input type='text' datepicker-popup is-open="focus" ng-focus="focus=true" class="form-control" id="fecha" autocomplete="off" name="fecha" placeholder="dd/mm/aaaa" value="" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>*@
+
+<div class="form-group">
+    <label>Pick date and time</label>
+    <div class="input-group date" data-onload-datetimepicker>
+        <input type="text" class="form-control" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label>Pick a date</label>
+    <div class="input-group date" data-onload-datetimepicker='{"locale": "es", "format": "D. M. YYYY"}'>
+        <input type="text" class="form-control" value="26. 6. 2016" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        </span>
+    </div>
+</div>
+
+@*<input size="16" type="text" class="form-control" id="datetime" readonly>
+        @section Scripts{
+
+            <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+            <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+            <script type="text/javascript">
+                $("#datetime").datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii'
+                });
+            </script>
+            @*<script type="text/javascript">
+                $(function () {
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes();
+                    var dateTime = date + ' ' + time;
+                    $("#form_datetime").datetimepicker({
+                        format: 'yyyy-mm-dd hh:ii',
+                        autoclose: true,
+                        todayBtn: true,
+                        startDate: dateTime
+                    });
+                });
+            </script>
+    }*@

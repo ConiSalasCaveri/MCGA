@@ -78,6 +78,7 @@
     <Compile Include="Profesional.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfesionalDummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDia.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>

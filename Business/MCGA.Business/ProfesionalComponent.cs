@@ -52,5 +52,15 @@ namespace MCGA.Business
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public IList<ProfesionalDummy> GetAutocomplete(string filter = "")
+        {
+            var asd = db.Profesional
+                .Where(x => x.Nombre.Contains(filter) || x.Apellido.Contains(filter) && x.isdeleted == false)
+                .Select(x=> new ProfesionalDummy { Id= x.Id, Nombre= x.Nombre, Apellido= x.Apellido })
+                .OrderBy(x => x.Id)
+                .ToList();
+            return asd;
+        }
     }
 }

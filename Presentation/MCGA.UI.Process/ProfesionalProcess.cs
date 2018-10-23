@@ -40,5 +40,9 @@ namespace MCGA.UI.Process
         {
             component.Update(entity);
         }
+        public IList<ProfesionalDummy> GetAutocomplete(string filter)
+        {
+            return component.GetAutocomplete(filter);
+        }
     }
 }

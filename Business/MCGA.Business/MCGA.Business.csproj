@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDiaComponent.cs" />
     <Compile Include="TipoDocumentoComponent.cs" />
+    <Compile Include="TipoEspecialidadComponent.cs" />
     <Compile Include="TipoReservaComponent.cs" />
     <Compile Include="TipoSexoComponent.cs" />
     <Compile Include="TurnoComponent.cs" />

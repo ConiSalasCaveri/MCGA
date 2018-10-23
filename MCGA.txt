@@ -37,3 +37,4 @@ PARA EL 11/10 - 18/10
 Llenar campos de auditoria
 Terminar ABM
 Avanzar con turnos
+Get autocomplete profesional no anda json - codigo de respuesta 500

@@ -1,0 +1,59 @@
+﻿@model MCGA.Entities.Especialidad
+
+@{
+    ViewBag.Title = "TurnoEstudio";
+}
+
+<h2>Tomar nuevo turno</h2>
+
+<h3>Busque un estudio</h3>
+
+<div class="_form-horizontal">
+    <div class="form-group">
+        <label for="EstudioDescription" class="control-label col-md-2">Especialidad</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="EstudioDescription" name="EstudioDescription" type="text" value="" placeholder="Ingrese las primeras letras de la especialidad" style="display: inline-block;"/>
+            <span class="field-validation-valid text-danger" data-valmsg-for="EstudioDescription" data-valmsg-replace="true" style="display: inline-block"></span>
+            <div style=" margin-left: 50px; display: inline-block">
+
+    @Html.ActionLink("Ver profesionales", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="estudioId" class="control-label col-md-2">Estudio Id</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="estudioId" type="text" readonly="readonly" />
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#EstudioDescription").autocomplete({
+            autoSelect: true,
+            autoFocus: true,
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetEspecialidades", "Turno")',
+                    datatype: "json",
+                    data: { Areas: '', term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.descripcion, value: val.descripcion, Id: val.Id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#estudioId").val(ui.item.Id);
+            }
+        });
+    </script>
+}
+
+

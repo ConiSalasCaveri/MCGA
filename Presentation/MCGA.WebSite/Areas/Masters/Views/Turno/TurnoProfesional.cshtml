@@ -1,0 +1,57 @@
+﻿@model MCGA.Entities.ProfesionalDummy
+
+@{
+    ViewBag.Title = "TurnoProfesional";
+}
+
+<h2>Tomar nuevo turno</h2>
+
+<h3>Busque un profesional</h3>
+
+<div class="_form-horizontal">
+    <div class="form-group">
+        <label for="ProfesionalName" class="control-label col-md-2">Profesional</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="ProfesionalName" name="ProfesionalName" type="text" value="" placeholder="Ingrese las primeras letras del profesional" style="display: inline-block;" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="ProfesionalName" data-valmsg-replace="true" style="display: inline-block"></span>
+            <div style=" margin-left: 50px; display: inline-block">
+
+                @Html.ActionLink("Ver especialidades", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="profesionalId" class="control-label col-md-2">Profesional Id</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="profesionalId" type="text" readonly="readonly" />
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#ProfesionalName").autocomplete({
+            autoSelect: true,
+            autoFocus: true,
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetProfesionales", "Turno")',
+                    datatype: "json",
+                    data: { Areas: '', term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.Nombre + " " + val.Apellido, value: val.Nombre + " " + val.Apellido, Id: val.Id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#profesionalId").val(ui.item.Id);
+            }
+        });
+    </script>
+}

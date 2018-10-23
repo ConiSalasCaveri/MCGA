@@ -40,5 +40,10 @@ namespace MCGA.UI.Process
         {
             component.Update(entity);
         }
+
+        public IList<Especialidad> GetAutocomplete(string filter)
+        {
+            return component.GetAutocomplete(filter);
+        }
     }
 }
