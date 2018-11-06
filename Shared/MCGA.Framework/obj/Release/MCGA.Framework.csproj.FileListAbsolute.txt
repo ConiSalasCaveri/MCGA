@@ -1,0 +1,6 @@
+C:\MCGA\MCGA\bin\MCGA.Framework.dll
+C:\MCGA\MCGA\bin\MCGA.Framework.pdb
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Release\MCGA.Framework.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Release\MCGA.Framework.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Release\MCGA.Framework.dll
+C:\MCGA\MCGA\Shared\MCGA.Framework\obj\Release\MCGA.Framework.pdb

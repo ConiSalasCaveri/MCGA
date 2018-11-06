@@ -15,6 +15,8 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         //private ApplicationDbContext db = new ApplicationDbContext();
         private ProfesionalProcess component = new ProfesionalProcess();
         private TipoDocumentoProcess tipoDocumentoComponent = new TipoDocumentoProcess();
+        private ProfesionalEspecialidadProcess profesionalEspecialidadIds = new ProfesionalEspecialidadProcess();
+        private static int profesionalId { get; set; }
 
         // GET: Masters/Profesional
         public ActionResult Index()
@@ -171,6 +173,42 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
                 component.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Especialidad(int id)
+        {
+            profesionalId = id;
+            var profesional = component.GetDetail(id);
+            if (profesional == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
+            return View(profesional);
+        }
+
+        public ActionResult ProfesionalEspecialidad(int id)
+        {
+            var especialidadProfesional = new EspecialidadesProfesional {
+                EspecialidadId = id,
+                ProfesionalId = profesionalId };
+            profesionalEspecialidadIds.Create(especialidadProfesional);
+            return RedirectToAction("List");
+        }
+
+        public JsonResult GetEspecialidades(string Areas, string term)
+        {
+            var especialidadProcess = new EspecialidadProcess();
+            var lista = especialidadProcess.GetAutocompleteWithProfesional(profesionalId, term);
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EspecialidadList(int idProfesional)
+        {
+
+
+            return View();
         }
     }
 }

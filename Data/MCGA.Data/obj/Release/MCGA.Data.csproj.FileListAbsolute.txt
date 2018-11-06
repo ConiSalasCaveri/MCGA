@@ -1,0 +1,8 @@
+C:\MCGA\MCGA\bin\MCGA.Data.dll.config
+C:\MCGA\MCGA\bin\MCGA.Data.dll
+C:\MCGA\MCGA\bin\MCGA.Data.pdb
+C:\MCGA\MCGA\Data\MCGA.Data\obj\Release\MCGA.Data.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Data\MCGA.Data\obj\Release\MCGA.Data.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Data\MCGA.Data\obj\Release\MCGA.Data.csproj.CopyComplete
+C:\MCGA\MCGA\Data\MCGA.Data\obj\Release\MCGA.Data.dll
+C:\MCGA\MCGA\Data\MCGA.Data\obj\Release\MCGA.Data.pdb

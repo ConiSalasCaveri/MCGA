@@ -7,6 +7,8 @@ using MCGA.Entities;
 using MCGA.UI.Process;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Globalization;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -16,6 +18,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private AfiliadoProcess afiliadoProcess = new AfiliadoProcess();
         private EspecialidadProcess especialidadProcess = new EspecialidadProcess();
         private ProfesionalProcess profesionalProcess = new ProfesionalProcess();
+
+        static int EspecialidadId { get; set; }
+        static int ProfesionalId { get; set; }
 
         // GET: Masters/Turno
         public ActionResult Index()
@@ -27,7 +32,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             return View(process.Get().OrderBy(x => x.Fecha).ToList());
         }
 
-        public ActionResult List(string currentFilter, string searchString, int? page)
+        public ActionResult ListaDeTurnos(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
                 page = 1;
@@ -166,10 +171,47 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             return View("TurnoProfesional");
         }
 
-        public ActionResult ListaTurnos()
+        public ActionResult ListaTurnos(int estudioId, int? page)
         {
-            return View("ListaTurnos");
+            IEnumerable<ProfesionalDummy> profesionals = profesionalProcess.GetByEspecialidad(estudioId);
+            EspecialidadId = estudioId;
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(profesionals.ToPagedList(pageNumber, pageSize));
         }
+
+        //TODO: hacer lo de turnos pero buscando por profesional, que de especialidades
+        //public ActionResult ListaTurnosProfesional(int estudioId, int? page)
+        //{
+        //    IEnumerable<ProfesionalDummy> profesionals = profesionalProcess.GetByEspecialidad(estudioId);
+        //    EspecialidadId = estudioId;
+        //    int pageSize = 3;
+        //    int pageNumber = (page ?? 1);
+        //    return View(profesionals.ToPagedList(pageNumber, pageSize));
+        //}
+
+        public ActionResult DetalleTurno(int id)
+        {
+            ProfesionalId = id;
+            // GET PROFESIONAL ID FOR PROPERTY
+            return View("DetalleTurno");
+        }
+
+        public ActionResult List(int currentId, int searchId, int? page)
+        {
+            if (searchId != 0)
+                page = 1;
+            else
+                searchId = currentId;
+
+            ViewBag.CurrentFilter = searchId;
+            IEnumerable<ProfesionalDummy> profesionals = profesionalProcess.GetByEspecialidad(4);
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(profesionals.ToPagedList(pageNumber, pageSize));
+        }
+
         public JsonResult GetEspecialidades(string Areas, string term)
         {
             var lista = especialidadProcess.GetAutocomplete(term);
@@ -181,6 +223,28 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             var lista = profesionalProcess.GetAutocomplete(term);
 
             return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult Register(string dia, string hora, string observaciones)
+
+        {
+            var especialidadProfesionalId = process.getEspecialidadProfesionalId(ProfesionalId, EspecialidadId);
+            string format = "MM/dd/yyyy";
+
+            var turno = new Turno {
+                Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
+                Hora = TimeSpan.Parse(hora),
+                Observaciones = observaciones,
+                EspecialidadProfesionalId = especialidadProfesionalId,
+                AfiliadoId = 4,
+                createdon = DateTime.Now,
+                changedon = DateTime.Now
+            };
+
+            process.Create(turno);
+            return RedirectToAction("TomarTurno");
         }
     }
 }

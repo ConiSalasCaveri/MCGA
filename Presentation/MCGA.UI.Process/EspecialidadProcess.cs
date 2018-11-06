@@ -41,9 +41,19 @@ namespace MCGA.UI.Process
             component.Update(entity);
         }
 
-        public IList<Especialidad> GetAutocomplete(string filter)
+        public IList<EspecialidadDummy> GetAutocomplete(string filter)
         {
             return component.GetAutocomplete(filter);
+        }
+
+        public IList<EspecialidadDummy> GetAutocompleteWithProfesional(int idProfesional, string filter)
+        {
+            return component.GetAutocompleteWithProfesional(idProfesional, filter);
+        }
+
+        public IList<EspecialidadDummy> GetByProfesional(int especialidadId)
+        {
+            return component.GetByProfesional(especialidadId);
         }
     }
 }

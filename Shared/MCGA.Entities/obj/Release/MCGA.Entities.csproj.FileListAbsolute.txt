@@ -1,0 +1,6 @@
+C:\MCGA\MCGA\bin\MCGA.Entities.dll
+C:\MCGA\MCGA\bin\MCGA.Entities.pdb
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Release\MCGA.Entities.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Release\MCGA.Entities.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Release\MCGA.Entities.dll
+C:\MCGA\MCGA\Shared\MCGA.Entities\obj\Release\MCGA.Entities.pdb

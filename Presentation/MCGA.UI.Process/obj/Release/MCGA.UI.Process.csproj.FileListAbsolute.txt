@@ -1,0 +1,7 @@
+C:\MCGA\MCGA\bin\MCGA.UI.Process.dll
+C:\MCGA\MCGA\bin\MCGA.UI.Process.pdb
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Release\MCGA.UI.Process.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Release\MCGA.UI.Process.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Release\MCGA.UI.Process.csproj.CopyComplete
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Release\MCGA.UI.Process.dll
+C:\MCGA\MCGA\Presentation\MCGA.UI.Process\obj\Release\MCGA.UI.Process.pdb

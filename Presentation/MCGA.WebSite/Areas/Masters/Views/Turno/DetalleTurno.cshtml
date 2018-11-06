@@ -1,0 +1,157 @@
+﻿@model MCGA.Entities.Turno
+
+@{
+    ViewBag.Title = "DetalleTurno";
+}
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery.timepicker.js"></script>
+<link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+
+<h2>Confirmar turno</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Turno</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div>Fecha del turno</div>
+            <div class='input-group date' id='datetimepicker1'>
+                <input type='text' id="mydatepicker" class="form-control" placeholder="Ingrese una fecha" />
+            </div>
+            @*<div class="col-md-10">
+            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+        </div>*@
+        </div>
+
+        <div class="form-group">
+            <div>Hora del turno</div>
+            <div>
+                <input type="text" data-time-format="H:i" id="myTimer" placeholder="Seleccione la hora." />
+            </div>
+            @*<div class="col-md-10">
+                @Html.EditorFor(model => model.Hora, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Hora, "", new { @class = "text-danger" })
+            </div>*@
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.AfiliadoId, "AfiliadoId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AfiliadoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AfiliadoId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.EspecialidadProfesionalId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EspecialidadProfesionalId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EspecialidadProfesionalId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.reserva, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.reserva, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reserva, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div>Observaciones</div>
+        <div class="form-group">
+            <input type="text" id="myObservacion" />
+            @*@Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+            </div>*@
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @*<input type="submit" value="Crear" class="btn btn-default" />*@
+                <input type="button" id="crear" value="Tomar turno" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div class="container">
+    <div>
+            <input type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" name="name" id="fecha-turno" value="" />
+        </div>
+
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>*@
+
+<script type="text/javascript">
+    $(function () {
+        $('#mydatepicker').datepicker(
+            {
+                beforeShowDay: $.datepicker.noWeekends,
+                minDate: 3,
+                maxDate: "+3M"
+            });
+    });
+</script>
+<script type="text/javascript">
+    $('#myTimer').timepicker({
+        'step': 40,
+        'disableTimeRanges': [
+
+        ],
+        'minTime': '9:00am',
+        'maxTime': '19:00pm'
+    }); 
+</script>
+@*<script type="text/javascript">
+    var myTimeDato = $("#myTimer").val();
+    var myFechaDato = $("#mydatepicker").val();
+    var myObservacionDato = $("#myObservacion").val();
+    function tomarTurno() {
+    var myTimeDato = $("#myTimer").val();   
+    var myFechaDato = $("#mydatepicker").val();        
+    var myObservacionDato = $("#myObservacion").val();
+        location.href = '/masters/turno/Register/?dia=' + myFechaDato + myTimeDato + '&observaciones=' + myObservacionDato;
+    }
+</script>*@
+<script type="text/javascript">
+    $(function () {
+        $("#crear").click(function () {
+            var myTimeDato = $("#myTimer").val();
+            var myFechaDato = $("#mydatepicker").val();
+            $.ajax({
+                type: "POST",
+                url: "/Turno/Register",
+                data: '{dia: "' + myFechaDato + '", hora: "' + myTimeDato + '", observaciones:"' + $("#myObservacion").val() +'" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+

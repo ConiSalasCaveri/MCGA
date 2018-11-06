@@ -1,0 +1,7 @@
+C:\MCGA\MCGA\bin\MCGA.Business.dll
+C:\MCGA\MCGA\bin\MCGA.Business.pdb
+C:\MCGA\MCGA\Business\MCGA.Business\obj\Release\MCGA.Business.csprojAssemblyReference.cache
+C:\MCGA\MCGA\Business\MCGA.Business\obj\Release\MCGA.Business.csproj.CoreCompileInputs.cache
+C:\MCGA\MCGA\Business\MCGA.Business\obj\Release\MCGA.Business.csproj.CopyComplete
+C:\MCGA\MCGA\Business\MCGA.Business\obj\Release\MCGA.Business.dll
+C:\MCGA\MCGA\Business\MCGA.Business\obj\Release\MCGA.Business.pdb

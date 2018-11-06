@@ -41,6 +41,9 @@ namespace MCGA.UI.Process
             throw new NotImplementedException();
         }
 
-        
+        public int getEspecialidadProfesionalId(int profesionalId, int especialidaId)
+        {
+            return component.getEspecialidadProfesionalId(profesionalId, especialidaId);
+        }
     }
 }

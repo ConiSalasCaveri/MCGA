@@ -44,5 +44,15 @@ namespace MCGA.Business
         {
             throw new NotImplementedException();
         }
+
+        public int getEspecialidadProfesionalId(int profesionalId, int especialidaId)
+        {
+            var especialidadprofesionalId = db.EspecialidadesProfesional
+                 .Where(x => x.ProfesionalId == profesionalId && x.EspecialidadId == especialidaId)
+                 .Select(x => x.Id)
+                 .FirstOrDefault();
+
+            return especialidadprofesionalId;
+        }
     }
 }

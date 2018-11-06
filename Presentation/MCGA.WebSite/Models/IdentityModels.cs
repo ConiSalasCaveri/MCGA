@@ -53,5 +53,7 @@ namespace MCGA.WebSite.Models
         public System.Data.Entity.DbSet<MCGA.Entities.TipoEspecialidad> TipoEspecialidads { get; set; }
 
         public System.Data.Entity.DbSet<MCGA.Entities.EstadoCivil> EstadoCivils { get; set; }
+
+        public System.Data.Entity.DbSet<MCGA.Entities.EspecialidadesProfesional> EspecialidadesProfesionals { get; set; }
     }
 }

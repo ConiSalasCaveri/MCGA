@@ -55,12 +55,32 @@ namespace MCGA.Business
 
         public IList<ProfesionalDummy> GetAutocomplete(string filter = "")
         {
-            var asd = db.Profesional
+            var profesionalDummies = db.Profesional
                 .Where(x => x.Nombre.Contains(filter) || x.Apellido.Contains(filter) && x.isdeleted == false)
                 .Select(x=> new ProfesionalDummy { Id= x.Id, Nombre= x.Nombre, Apellido= x.Apellido })
                 .OrderBy(x => x.Id)
                 .ToList();
-            return asd;
+            return profesionalDummies;
+        }
+
+        public IList<ProfesionalDummy> GetByEspecialidad(int especialidadId)
+        {
+            var especialidadIds = db.EspecialidadesProfesional
+                .Where(x => x.EspecialidadId == especialidadId)
+                .Select(x => x.ProfesionalId)
+                .ToList();                ;
+
+            var profesionals = db.Profesional
+                .Where(x => x.isdeleted == false)                
+                .ToList();
+
+            var profesionalDummies = profesionals
+                .Where(x => especialidadIds.Contains(x.Id))
+                .Select(x => new ProfesionalDummy { Id = x.Id, Nombre = x.Nombre, Apellido = x.Apellido })
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            return profesionalDummies;
         }
     }
 }

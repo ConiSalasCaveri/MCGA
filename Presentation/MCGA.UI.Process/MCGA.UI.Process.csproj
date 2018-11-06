@@ -50,6 +50,7 @@
     <Compile Include="EstadoCivilProcess.cs" />
     <Compile Include="ICrud.cs" />
     <Compile Include="PlanProcess.cs" />
+    <Compile Include="ProfesionalEspecialidadProcess.cs" />
     <Compile Include="ProfesionalProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDiaProcess.cs" />

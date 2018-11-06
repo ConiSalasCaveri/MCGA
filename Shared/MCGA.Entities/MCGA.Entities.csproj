@@ -49,6 +49,7 @@
     <Compile Include="Especialidad.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
+    <Compile Include="EspecialidadDummy.cs" />
     <Compile Include="EspecialidadesProfesional.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>

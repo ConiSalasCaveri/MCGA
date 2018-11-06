@@ -49,6 +49,7 @@
     <Compile Include="ICrud.cs" />
     <Compile Include="PlanComponent.cs" />
     <Compile Include="ProfesionalComponent.cs" />
+    <Compile Include="ProfesionalEspecialidadComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDiaComponent.cs" />
     <Compile Include="TipoDocumentoComponent.cs" />

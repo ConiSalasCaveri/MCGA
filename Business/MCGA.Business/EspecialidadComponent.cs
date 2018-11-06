@@ -33,12 +33,32 @@ namespace MCGA.Business
         {
             return db.Especialidad.ToList();
         }
-        public IList<Especialidad> GetAutocomplete(string filter = "")
+        public IList<EspecialidadDummy> GetAutocomplete(string filter = "")
         {
             return db.Especialidad
                 .Where(x => x.descripcion.Contains(filter))
+                .Select(x => new EspecialidadDummy { Id = x.Id, Descripcion = x.descripcion})
                 .OrderBy(x => x.Id)
                 .ToList();
+        }
+
+        public IList<EspecialidadDummy> GetAutocompleteWithProfesional(int idProfesional, string filter = "")
+        {
+            var especialidadesProfesional = db.EspecialidadesProfesional
+                .Where(x => x.ProfesionalId == idProfesional)
+                .Select(x => x.EspecialidadId)
+                .ToList();
+
+            var especialidades = db.Especialidad
+                .Where(x => x.descripcion.Contains(filter))                
+                .ToList();
+
+            var especialidadDummies = especialidades
+                .Where(x => !especialidadesProfesional.Contains(x.Id))
+                .Select(x => new EspecialidadDummy { Id = x.Id, Descripcion = x.descripcion })
+                .OrderBy(x => x.Id)
+                .ToList();
+            return especialidadDummies;
         }
 
         public Especialidad GetDetail(int? id)
@@ -50,6 +70,25 @@ namespace MCGA.Business
         {
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public IList<EspecialidadDummy> GetByProfesional(int profesionalId)
+        {
+            var especialidadIds = db.EspecialidadesProfesional
+                .Where(x => x.ProfesionalId == profesionalId)
+                .Select(x => x.EspecialidadId)
+                .ToList();
+
+            var especialidades = db.Especialidad                
+                .ToList();
+
+            var especialidadDummies = especialidades
+                .Where(x => especialidadIds.Contains(x.Id))
+                .Select(x => new EspecialidadDummy { Id = x.Id, Descripcion = x.descripcion })
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            return especialidadDummies;
         }
     }
 }

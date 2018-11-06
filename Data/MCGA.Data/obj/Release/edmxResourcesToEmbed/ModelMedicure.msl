@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicureModelStoreContainer" CdmEntityContainer="MedicureContext">
+    <EntitySetMapping Name="TipoDia">
+      <EntityTypeMapping TypeName="MedicureModel.TipoDia">
+        <MappingFragment StoreEntitySet="TipoDia">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Afiliado">
+      <EntityTypeMapping TypeName="MedicureModel.Afiliado">
+        <MappingFragment StoreEntitySet="Afiliado">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+          <ScalarProperty Name="NumeroAfiliado" ColumnName="NumeroAfiliado" />
+          <ScalarProperty Name="EstadoCivilId" ColumnName="EstadoCivilId" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="TipoSexoId" ColumnName="TipoSexoId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Agenda">
+      <EntityTypeMapping TypeName="MedicureModel.Agenda">
+        <MappingFragment StoreEntitySet="Agenda">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="hora_hasta" ColumnName="hora_hasta" />
+          <ScalarProperty Name="hora_desde" ColumnName="hora_desde" />
+          <ScalarProperty Name="fecha_hasta" ColumnName="fecha_hasta" />
+          <ScalarProperty Name="fecha_desde" ColumnName="fecha_desde" />
+          <ScalarProperty Name="TipoDiaId" ColumnName="TipoDiaId" />
+          <ScalarProperty Name="EspecialidadProfesionalId" ColumnName="EspecialidadProfesionalId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Especialidad">
+      <EntityTypeMapping TypeName="MedicureModel.Especialidad">
+        <MappingFragment StoreEntitySet="Especialidad">
+          <ScalarProperty Name="TipoEspecialidadId" ColumnName="TipoEspecialidadId" />
+          <ScalarProperty Name="frecuencia" ColumnName="frecuencia" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesional">
+      <EntityTypeMapping TypeName="MedicureModel.Profesional">
+        <MappingFragment StoreEntitySet="Profesional">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDocumento">
+      <EntityTypeMapping TypeName="MedicureModel.TipoDocumento">
+        <MappingFragment StoreEntitySet="TipoDocumento">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoReseva">
+      <EntityTypeMapping TypeName="MedicureModel.TipoReseva">
+        <MappingFragment StoreEntitySet="TipoReseva">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoSexo">
+      <EntityTypeMapping TypeName="MedicureModel.TipoSexo">
+        <MappingFragment StoreEntitySet="TipoSexo">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Turno">
+      <EntityTypeMapping TypeName="MedicureModel.Turno">
+        <MappingFragment StoreEntitySet="Turno">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="reserva" ColumnName="reserva" />
+          <ScalarProperty Name="EspecialidadProfesionalId" ColumnName="EspecialidadProfesionalId" />
+          <ScalarProperty Name="AfiliadoId" ColumnName="AfiliadoId" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EspecialidadesProfesional">
+      <EntityTypeMapping TypeName="MedicureModel.EspecialidadesProfesional">
+        <MappingFragment StoreEntitySet="EspecialidadesProfesional">
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="ProfesionalId" ColumnName="ProfesionalId" />
+          <ScalarProperty Name="EspecialidadId" ColumnName="EspecialidadId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plan">
+      <EntityTypeMapping TypeName="MedicureModel.Plan">
+        <MappingFragment StoreEntitySet="Plan">
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedon" ColumnName="deletedon" />
+          <ScalarProperty Name="changedby" ColumnName="changedby" />
+          <ScalarProperty Name="changedon" ColumnName="changedon" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="precio_bono_farmacia" ColumnName="precio_bono_farmacia" />
+          <ScalarProperty Name="precio_bono_consulta" ColumnName="precio_bono_consulta" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEspecialidad">
+      <EntityTypeMapping TypeName="MedicureModel.TipoEspecialidad">
+        <MappingFragment StoreEntitySet="TipoEspecialidad">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCivil">
+      <EntityTypeMapping TypeName="MedicureModel.EstadoCivil">
+        <MappingFragment StoreEntitySet="EstadoCivil">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

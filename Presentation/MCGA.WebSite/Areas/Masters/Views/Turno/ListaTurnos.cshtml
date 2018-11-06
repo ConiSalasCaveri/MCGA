@@ -1,97 +1,105 @@
-﻿
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MCGA.Entities.ProfesionalDummy>
 @{
     ViewBag.Title = "ListaTurnos";
 }
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Titillium+Web:400,300,700&amp;subset=latin,latin-ext" />
+<link href="~/Content/bootstrap-ui.css" rel="stylesheet" />
 
-<script src="~/Scripts/jquery-1.12.4.min.js"></script>
-<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-<script src="~/Scripts/moment.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/Scripts/moment-with-locales.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-<script src="~/Scripts/modernizr-2.8.3.js"></script>
-<script src="~/Scripts/moment-with-locales.js"></script>
+<script src="~/Scripts/bootstrap-ui.js"></script>
 
-@*<script src="~/Scripts/bootstrap.min.js"></script>*@
-
-<h2>ListaTurnos</h2>
-
-@*<div class="container">
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                $(function () {
-                    var today = new Date();
-                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    $('#datetimepicker1').datepicker({
-                        format: 'yyyy-mm-dd hh:ii',
-                        autoclose: true,
-                        todayBtn: true,
-                        startDate: date
-                    });
-
-                });
-            </script>
+<h2>Turnos por estudio</h2>
+<h4>Médicos disponibles</h4>
+@*<div class="_form-horizontal">
+    <div class="form-group">
+        <label for="EspecialidadName" class="control-label col-md-2">Dia</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="EspecialidadName" name="EspecialidadName" type="text" value="" placeholder="Ingrese las primeras letras del dia" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="EspecialidadName" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="especialidadId" class="control-label col-md-2">Dia Id</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="especialidadId" type="text" readonly="readonly" />
         </div>
     </div>
 
-    <div class='input-group date'>
-        <input type='text' datepicker-popup is-open="focus" ng-focus="focus=true" class="form-control" id="fecha" autocomplete="off" name="fecha" placeholder="dd/mm/aaaa" value="" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>*@
+</div>*@
 
-<div class="form-group">
-    <label>Pick date and time</label>
-    <div class="input-group date" data-onload-datetimepicker>
-        <input type="text" class="form-control" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        </span>
-    </div>
-</div>
-<div class="form-group">
-    <label>Pick a date</label>
-    <div class="input-group date" data-onload-datetimepicker='{"locale": "es", "format": "D. M. YYYY"}'>
-        <input type="text" class="form-control" value="26. 6. 2016" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        </span>
-    </div>
-</div>
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            <span data-toggle="tooltip" data-placement="top" title="Nombre del profesional">@Html.Raw("Nombre")</span>
+        </th>
+        <th>
+            @Html.Raw("Apellido")
+        </th>
+        <th></th>
+    </tr>
 
-@*<input size="16" type="text" class="form-control" id="datetime" readonly>
-        @section Scripts{
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Tomar turno
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>@Html.ActionLink("Tomar turno con este profesional", "DetalleTurno", new { id = item.Id })</li>
+                        @*<li>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+        </li>
+        <li>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</li>
+        <li role="separator" class="divider"></li>
+        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })</li>*@
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
 
-            <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-            <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("ListaTurnos", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
-            <script type="text/javascript">
-                $("#datetime").datetimepicker({
-                    format: 'yyyy-mm-dd hh:ii'
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#EspecialidadName").autocomplete({
+            autoSelect: true,
+            autoFocus: true,
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetDias", "TipoDia")',
+                    datatype: "json",
+                    data: { Areas: '', term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.descripcion, value: val.descripcion, Id: val.Id };
+                        }));
+                    }
                 });
-            </script>
-            @*<script type="text/javascript">
-                $(function () {
-                    var today = new Date();
-                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes();
-                    var dateTime = date + ' ' + time;
-                    $("#form_datetime").datetimepicker({
-                        format: 'yyyy-mm-dd hh:ii',
-                        autoclose: true,
-                        todayBtn: true,
-                        startDate: dateTime
-                    });
-                });
-            </script>
-    }*@
+            },
+            select: function (event, ui) {
+                $("#especialidadId").val(ui.item.Id);
+            }
+        });
+    </script>
+}*@

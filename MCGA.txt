@@ -38,3 +38,25 @@ Llenar campos de auditoria
 Terminar ABM
 Avanzar con turnos
 Get autocomplete profesional no anda json - codigo de respuesta 500
+
+CLASE 25/10
+Capítulo 2, 3 y 5
+Programación paralela
+Diferencia entre hilos y procesos
+Hilos: un hilo es un monoproceso o subproceso
+Proceso: tiene su propio estado, esta compuesto por muchos hilos, crea hilos.
+patrones: pipeline, montecarlo
+sincronización de bloqueo
+
+Hacer asignar especialidad a profesional(QUE NO LA TENGA ASIGNADA) DONE
+Hacer ver especialidades de cada profesional y eliminarlas
+Subir a somee(tried)
+Ver los roles de los perfiles
+Crear la agenda
+Deshabilitar fechas y horas de la toma de turnos de acuerdo a la fecha
+Ver que pasa con el boton de operaciones
+
+la silla seria una connection, un array
+sync fusion comunity
+
+8 - clase milio
