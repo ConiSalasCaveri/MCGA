@@ -21,8 +21,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
         //[Route("vertodos", Name = AfiliadoControllerRoute.GetEntities)]
         public ActionResult Index()
-        {            
-            return View(component.Get());
+        {
+            //return View(component.Get());
+            return RedirectToAction("List");
         }
 
         public ActionResult ListBase()

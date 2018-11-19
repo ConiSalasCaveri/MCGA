@@ -43,6 +43,7 @@
     <Compile Include="Afiliado.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>
+    <Compile Include="AfiliadoDummy.cs" />
     <Compile Include="Agenda.cs">
       <DependentUpon>ModelMedicure.tt</DependentUpon>
     </Compile>

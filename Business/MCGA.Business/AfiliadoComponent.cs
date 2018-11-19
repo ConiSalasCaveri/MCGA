@@ -54,5 +54,15 @@ namespace MCGA.Business
         {
             return db.Afiliado;
         }
+
+        public IList<AfiliadoDummy> GetAutocomplete(string filter = "")
+        {
+            var afiliadoDummies = db.Afiliado
+                .Where(x => x.Nombre.Contains(filter) || x.Apellido.Contains(filter) && x.isdeleted == false && x.Habilitado)
+                .Select(x => new AfiliadoDummy { Id = x.Id, Nombre = x.Nombre, Apellido = x.Apellido })
+                .OrderBy(x => x.Id)
+                .ToList();
+            return afiliadoDummies;
+        }
     }
 }

@@ -3,14 +3,6 @@
 @{
     ViewBag.Title = "ListaTurnos";
 }
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Titillium+Web:400,300,700&amp;subset=latin,latin-ext" />
-<link href="~/Content/bootstrap-ui.css" rel="stylesheet" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="~/Scripts/moment-with-locales.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-<script src="~/Scripts/bootstrap-ui.js"></script>
 
 <h2>Turnos por estudio</h2>
 <h4>Médicos disponibles</h4>
@@ -58,7 +50,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>@Html.ActionLink("Tomar turno con este profesional", "DetalleTurno", new { id = item.Id })</li>
+                        <li>@Html.ActionLink("Tomar turno con este profesional", "DetalleTurno", new { id = item.Id , isProfesional = true})</li>
                         @*<li>
             @Html.ActionLink("Editar", "Edit", new { id = item.Id })
         </li>

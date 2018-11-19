@@ -82,5 +82,31 @@ namespace MCGA.Business
 
             return profesionalDummies;
         }
+
+        public IList<EspecialidadDummy> GetEspecialidadesById(int profesionalId)
+        {
+            var especialidadIds = db.EspecialidadesProfesional
+                .Where(x => x.ProfesionalId == profesionalId)
+                .Select(x => x.EspecialidadId)
+                .ToList();
+
+            var descriptions = db.Especialidad.ToList();
+
+            var especialidadDummies = descriptions.Where(x => especialidadIds.Contains(x.Id))
+                .Select(x => new EspecialidadDummy { Id = x.Id, Descripcion = x.descripcion })
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            return especialidadDummies;
+        }
+
+        public void DeleteEspecialidadOfProfesional(int idEspecialidad, int idProfesional)
+        {
+            var especialidadProfesional = db.EspecialidadesProfesional
+                .Where(x => x.EspecialidadId == idEspecialidad && x.ProfesionalId == idProfesional)
+                .SingleOrDefault();
+            db.EspecialidadesProfesional.Remove(especialidadProfesional);
+            db.SaveChanges();
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MCGA.Entities;
 using MCGA.UI.Process;
+using PagedList;
 using WebApplication1.Services.Cache;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
@@ -12,9 +15,31 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
         // GET: Masters/Especialidad
         public ActionResult Index()
+        {            
+            return RedirectToAction("List");
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
         {
-            var list = DataCache.Instance.EspecialidadList();            
-            return View(list);
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<Especialidad> especialidades = component.Get();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                especialidades = especialidades
+                    .Where(s => s.descripcion.ToLower().Contains(searchString.ToLower()));                    
+            }
+            especialidades = especialidades                
+                .OrderBy(o => o.descripcion);
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(especialidades.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Masters/Especialidad/Details/5

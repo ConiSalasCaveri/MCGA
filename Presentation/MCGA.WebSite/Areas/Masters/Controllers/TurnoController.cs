@@ -180,6 +180,14 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             return View(profesionals.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult ListaTurnosEspecialidad(int profesionalId, int? page)
+        {
+            IEnumerable<EspecialidadDummy> profesionals = especialidadProcess.GetByProfesional(profesionalId);
+            ProfesionalId = profesionalId;
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(profesionals.ToPagedList(pageNumber, pageSize));
+        }
         //TODO: hacer lo de turnos pero buscando por profesional, que de especialidades
         //public ActionResult ListaTurnosProfesional(int estudioId, int? page)
         //{
@@ -190,9 +198,15 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         //    return View(profesionals.ToPagedList(pageNumber, pageSize));
         //}
 
-        public ActionResult DetalleTurno(int id)
+        public ActionResult DetalleTurno(int id, bool isProfesional)
         {
-            ProfesionalId = id;
+            if (isProfesional)
+            {
+                ProfesionalId = id;
+            }
+            else {
+                EspecialidadId = id;
+            }            
             // GET PROFESIONAL ID FOR PROPERTY
             return View("DetalleTurno");
         }
@@ -224,27 +238,32 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetAfiliados(string Areas, string term)
+        {
+            var lista = afiliadoProcess.GetAutocomplete(term);
 
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
-        public ActionResult Register(string dia, string hora, string observaciones)
+        public ActionResult Register(string dia, string hora, string observaciones, int afiliadoId)
 
         {
             var especialidadProfesionalId = process.getEspecialidadProfesionalId(ProfesionalId, EspecialidadId);
             string format = "MM/dd/yyyy";
 
-            var turno = new Turno {
-                Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
-                Hora = TimeSpan.Parse(hora),
-                Observaciones = observaciones,
-                EspecialidadProfesionalId = especialidadProfesionalId,
-                AfiliadoId = 4,
-                createdon = DateTime.Now,
-                changedon = DateTime.Now
-            };
+            //var turno = new Turno {
+            //    Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
+            //    Hora = TimeSpan.Parse(hora),
+            //    Observaciones = observaciones,
+            //    EspecialidadProfesionalId = especialidadProfesionalId,
+            //    AfiliadoId = 4,
+            //    createdon = DateTime.Now,
+            //    changedon = DateTime.Now
+            //};
 
-            process.Create(turno);
-            return RedirectToAction("TomarTurno");
+            //process.Create(turno);
+            return View("home");
         }
     }
 }

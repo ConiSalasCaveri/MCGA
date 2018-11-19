@@ -37,6 +37,12 @@ namespace MCGA.WebSite
             // Enable attribute routing.
             routes.MapMvcAttributeRoutes();
 
+            routes.MapRoute(
+                name: "Masters",
+                url: "Masters/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "MCGA.Website.Areas.Masters.Controllers" }
+            ).DataTokens["area"] = "Masters";
 
             routes.MapRoute(
                 name: "Default",

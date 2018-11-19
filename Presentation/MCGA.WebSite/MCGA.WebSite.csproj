@@ -408,6 +408,8 @@
     <Content Include="Areas\Masters\Views\EspecialidadesProfesionals\Index.cshtml" />
     <Content Include="Areas\Masters\Views\ProfesionalEspecialidad\List.cshtml" />
     <Content Include="Areas\Masters\Views\Profesional\EspecialidadList.cshtml" />
+    <Content Include="Areas\Masters\Views\Especialidad\List.cshtml" />
+    <Content Include="Areas\Masters\Views\Turno\ListaTurnosEspecialidad.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />

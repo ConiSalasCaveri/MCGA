@@ -36,7 +36,10 @@ namespace MCGA.UI.Process
         {
             return component.GetDetail(id);
         }
-
+        public IList<AfiliadoDummy> GetAutocomplete(string filter)
+        {
+            return component.GetAutocomplete(filter);
+        }
         public void Update(Afiliado entity)
         {
             component.Update(entity);

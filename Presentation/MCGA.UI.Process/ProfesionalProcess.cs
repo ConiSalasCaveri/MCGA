@@ -49,5 +49,15 @@ namespace MCGA.UI.Process
         {
             return component.GetByEspecialidad(especialidadId);
         }
+
+        public IList<EspecialidadDummy> GetEspecialidadesById(int id)
+        {
+            return component.GetEspecialidadesById(id);
+        }
+
+        public void DeleteEspecialidadOfProfesional(int idEspecialidad, int idProfesional)
+        {
+            component.DeleteEspecialidadOfProfesional(idEspecialidad, idProfesional);
+        }
     }
 }

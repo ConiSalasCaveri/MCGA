@@ -11,10 +11,10 @@
     @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-@using (Html.BeginForm("List", "Profesional", FormMethod.Get))
+@using (Html.BeginForm("List", "Plan", FormMethod.Get))
 {
     <p>
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Ingrese nombre o apellido del profesional", style = "width:350px; display: inline-block;" })
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Ingrese descripcion del plan", style = "width:350px; display: inline-block;" })
         <input type="submit" value="Buscar" class="btn btn-info" />
     </p>
 }

@@ -10,7 +10,12 @@
 
 <p>
     @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+    <button type="button" class="btn btn-info" data-toggle="popover" title="Detalles" style="display: inline-block; margin-left: 10px"
+            data-content="Para ver detalles del profesional ingrese al sector 'detalles' ubicado en el menu de operaciones.">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    </button>
 </p>
+
 
 @using (Html.BeginForm("List", "Profesional", FormMethod.Get))
 {
@@ -18,6 +23,7 @@
         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Ingrese nombre o apellido del profesional", style = "width:350px; display: inline-block;" })
         <input type="submit" value="Buscar" class="btn btn-info" />
     </p>
+     
 }
 <table class="table table-condensed table-striped">
     <tr>
@@ -29,21 +35,6 @@
         </th>
         <th>
             @Html.Raw("Numero")
-        </th>
-        <th>
-            @Html.Raw("Direccion")
-        </th>
-        <th>
-            @Html.Raw("Documento")
-        </th>
-        <th>
-            @Html.Raw("Telefono")
-        </th>
-        <th>
-            @Html.Raw("Mail")
-        </th>
-        <th>
-            @Html.Raw("Fecha nac.")
         </th>
         <th>
             @Html.Raw("Matricula")
@@ -62,22 +53,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Numero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoDocumento.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-        </td>
+        </td>        
         <td>
             @Html.DisplayFor(modelItem => item.Matricula)
         </td>
@@ -95,7 +71,7 @@
                     <li role="separator" class="divider"></li>
                     <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })</li>
                     <li>@Html.ActionLink("Asignar especialidad", "Especialidad", new { id = item.Id })</li>
-                    <li>@Html.ActionLink("Ver especialidades", "Especialidad", new { id = item.Id })</li>
+                    <li>@Html.ActionLink("Ver especialidades", "EspecialidadList", new { id = item.Id })</li>
                 </ul>
             </div>
         </td>

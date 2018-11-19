@@ -14,9 +14,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         // GET: Masters/TipoDia
         public ActionResult Index()
         {
-            //return View(component.Get());
             var list = DataCache.Instance.TipoDiaList();
             return View(list);
+            //return RedirectToAction("List");
         }
 
         public ActionResult List()

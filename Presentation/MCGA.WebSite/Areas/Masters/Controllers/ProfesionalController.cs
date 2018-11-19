@@ -17,15 +17,17 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private TipoDocumentoProcess tipoDocumentoComponent = new TipoDocumentoProcess();
         private ProfesionalEspecialidadProcess profesionalEspecialidadIds = new ProfesionalEspecialidadProcess();
         private static int profesionalId { get; set; }
+        private static int profesionalIdForDelete { get; set; }
 
         // GET: Masters/Profesional
         public ActionResult Index()
-        {            
-            var list = DataCache.Instance.ProfesionalList();
-            return View(list                
-                .Where(x => x.isdeleted == false)
-                .OrderBy(x => x.Nombre)
-                .ToList());
+        {
+            //var list = DataCache.Instance.ProfesionalList();
+            //return View(list                
+            //    .Where(x => x.isdeleted == false)
+            //    .OrderBy(x => x.Nombre)
+            //    .ToList());
+            return RedirectToAction("List");
         }
 
         public ActionResult ListBase()
@@ -204,11 +206,18 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EspecialidadList(int idProfesional)
+        public ActionResult EspecialidadList(int id)
         {
+            profesionalIdForDelete = id;
+            var especialidades = component.GetEspecialidadesById(id);
 
+            return View(especialidades);
+        }
 
-            return View();
+        public ActionResult DeleteEspecialidad(int id)
+        {
+            component.DeleteEspecialidadOfProfesional(id, profesionalIdForDelete);
+            return RedirectToAction("List");
         }
     }
 }
