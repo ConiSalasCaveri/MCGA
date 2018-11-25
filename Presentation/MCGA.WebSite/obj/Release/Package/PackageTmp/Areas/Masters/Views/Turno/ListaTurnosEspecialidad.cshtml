@@ -1,0 +1,41 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MCGA.Entities.EspecialidadDummy>
+
+@{
+    ViewBag.Title = "ListaTurnosEspecialidad";
+}
+
+<h2>Turnos por médico</h2>
+<h4>Especialidades disponibles disponibles</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Descripcion")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Tomar turno
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>@Html.ActionLink("Tomar turno en esta especialidad", "DetalleTurno", new { id = item.Id, isProfesional = false })</li>                        
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("ListaTurnos", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

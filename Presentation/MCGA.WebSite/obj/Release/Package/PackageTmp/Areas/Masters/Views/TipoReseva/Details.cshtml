@@ -1,0 +1,20 @@
+﻿@model MCGA.Entities.TipoReseva
+
+    <div>
+        <h4>Tipos de reseva</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver", "Index")
+    </p>

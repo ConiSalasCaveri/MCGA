@@ -1,0 +1,37 @@
+﻿@using MCGA.WebSite.Constants
+@using MCGA.WebSite.Constants.HomeController
+@{
+    ViewBag.Title = "Medicure S.A";
+    ViewBag.Description = "Description del Sitio - Ver SEO.";
+    ViewBag.Author = Application.Name;
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@TwitterCard");
+    ViewBag.OpenGraph = new OpenGraphBusiness(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
+        new OpenGraphContactData(Application.StreetAddress, Application.Locality, Application.PostalCode, Application.Country)
+        {
+            Email = Application.Email,
+            Phone = Application.Phone,
+            Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
+        },
+        new OpenGraphLocation(Application.Latitude, Application.Longitude))
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        SiteName = Application.Name
+    };
+}
+<h2>Contacto.</h2>
+<h3>Horario de atencion: Lunes a viernes de 08:00 a 19:00 hrs.</h3>
+
+<address>
+    Ciudad Autónoma de Buenos Aires<br />
+    Puerto Madero, Av. Rodríguez 2665<br />
+    <abbr title="Phone">Teléfono:</abbr>
+    011-3684-2938
+</address>
+
+<address>
+    <strong>Área de soporte:</strong>   <a href="mailto:Support@example.com">soporte@medicure.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">marketing@medicure.com</a>
+</address>

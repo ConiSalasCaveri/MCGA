@@ -9,6 +9,8 @@ using PagedList;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Globalization;
+using Microsoft.Ajax.Utilities;
+using System.Web.Script.Serialization;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -206,7 +208,10 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             }
             else {
                 EspecialidadId = id;
-            }            
+            }
+            var emptyArray = new string[0];
+            ViewData["myHours"] = emptyArray;
+            //GetHorarios(dia);
             // GET PROFESIONAL ID FOR PROPERTY
             return View("DetalleTurno");
         }
@@ -244,6 +249,17 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult GetHorarios(string dia)
+        {
+            var horarios = process.GetTimes(dia);
+
+            var total = horarios
+                .Select(x => new string[] { x.Hour.ToString(), x.Hour.Add(TimeSpan.FromMinutes(40)).ToString() }).ToList();
+            ViewData["myHours"] = total;
+            return new EmptyResult();
+
+        }
 
         [HttpPost]
         public ActionResult Register(string dia, string hora, string observaciones, int afiliadoId)
@@ -252,17 +268,18 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
             var especialidadProfesionalId = process.getEspecialidadProfesionalId(ProfesionalId, EspecialidadId);
             string format = "MM/dd/yyyy";
 
-            //var turno = new Turno {
-            //    Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
-            //    Hora = TimeSpan.Parse(hora),
-            //    Observaciones = observaciones,
-            //    EspecialidadProfesionalId = especialidadProfesionalId,
-            //    AfiliadoId = 4,
-            //    createdon = DateTime.Now,
-            //    changedon = DateTime.Now
-            //};
+            var turno = new Turno
+            {
+                Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
+                Hora = TimeSpan.Parse(hora),
+                Observaciones = observaciones,
+                EspecialidadProfesionalId = especialidadProfesionalId,
+                AfiliadoId = afiliadoId,
+                createdon = DateTime.Now,
+                changedon = DateTime.Now
+            };
 
-            //process.Create(turno);
+            process.Create(turno);
             return View("home");
         }
     }

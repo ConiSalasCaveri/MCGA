@@ -1,0 +1,116 @@
+﻿@model MCGA.Entities.Agenda
+
+    <div>
+        <h4>Agenda</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoDia.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoDia.descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EspecialidadProfesionalId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EspecialidadProfesionalId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha_desde)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fecha_desde)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha_hasta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fecha_hasta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.hora_desde)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.hora_desde)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.hora_hasta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.hora_hasta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.createdon)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.createdon)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.createdby)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.createdby)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.changedon)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.changedon)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.changedby)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.changedby)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.deletedon)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.deletedon)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.deletedby)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.deletedby)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.isdeleted)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.isdeleted)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver", "Index")
+    </p>

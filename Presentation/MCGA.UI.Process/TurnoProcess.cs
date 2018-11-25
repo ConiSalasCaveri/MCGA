@@ -45,5 +45,10 @@ namespace MCGA.UI.Process
         {
             return component.getEspecialidadProfesionalId(profesionalId, especialidaId);
         }
+
+        public IList<TurnoTimesDummy> GetTimes(string dia)
+        {
+            return component.GetTimes(dia);
+        }
     }
 }

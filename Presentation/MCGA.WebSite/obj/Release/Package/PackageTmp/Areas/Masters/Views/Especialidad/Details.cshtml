@@ -1,0 +1,30 @@
+﻿@model MCGA.Entities.Especialidad
+
+    <div>
+        <h4>Especialidades</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.frecuencia)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.frecuencia)
+            </dd>
+                
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Volver", "Index")
+    </p>
+

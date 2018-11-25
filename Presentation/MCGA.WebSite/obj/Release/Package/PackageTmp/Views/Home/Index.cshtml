@@ -1,0 +1,61 @@
+﻿@using MCGA.WebSite.Constants
+@using MCGA.WebSite.Constants.HomeController
+@{
+    ViewBag.Title = "Medicure S.A";
+    ViewBag.Description = "Description del Sitio - Ver SEO.";
+    ViewBag.Author = Application.Name;
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@TwitterCard");
+    ViewBag.OpenGraph = new OpenGraphBusiness(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
+        new OpenGraphContactData(Application.StreetAddress, Application.Locality, Application.PostalCode, Application.Country)
+        {
+            Email = Application.Email,
+            Phone = Application.Phone,
+            Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
+        },
+        new OpenGraphLocation(Application.Latitude, Application.Longitude))
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        SiteName = Application.Name
+    };
+}
+
+<div class="jumbotron">
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="~/Content/Images/1.jpg" alt="First Image" />
+            </div>
+            <div class="item">
+                <img src="~/Content/Images/2.jpg" alt="Second Image" />
+            </div>
+            <div class="item">
+                <img src="~/Content/Images/3.jpg" alt="Third Image" />
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Tomar turnos</h2>
+        <p>
+            Esta aplicación le permite a sus usuarios manejar todas las transacciones de una clínica de
+            manera simple y rápida. Gracias a su interfaz amigable es sencillo para cualquier persona
+            utilizarla.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Registrar pacientes</h2>
+        <p>Usted puede registrar nuevos pacientes en la clínica de manera simple y rápida.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Registrar médicos</h2>
+        <p>Usted puede registrar nuevos médicos en la clínica de manera simple y rápida.</p>
+    </div>
+</div>
+
+<div>@Html.Partial("PartialHome")</div>

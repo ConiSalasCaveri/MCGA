@@ -3,6 +3,7 @@ using MCGA.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,18 @@ namespace MCGA.Business
                  .FirstOrDefault();
 
             return especialidadprofesionalId;
+        }
+
+        public IList<TurnoTimesDummy> GetTimes(string dia)
+        {
+            string format = "MM/dd/yyyy";
+            var diaFormated = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture);
+            var meirda = db.Turno.Select(x => x.Fecha).ToList();
+            var turnos = db.Turno
+                .Where(x => x.Fecha == diaFormated)
+                .Select(x => new TurnoTimesDummy { Hour = x.Hora })
+                .ToList();
+            return turnos;
         }
     }
 }

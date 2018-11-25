@@ -1,0 +1,31 @@
+﻿@using MCGA.WebSite.Constants
+@using MCGA.WebSite.Constants.HomeController
+@{
+    ViewBag.Title = "Medicure S.A";
+    ViewBag.Description = "Description del Sitio - Ver SEO.";
+    ViewBag.Author = Application.Name;
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@TwitterCard");
+    ViewBag.OpenGraph = new OpenGraphBusiness(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
+        new OpenGraphContactData(Application.StreetAddress, Application.Locality, Application.PostalCode, Application.Country)
+        {
+            Email = Application.Email,
+            Phone = Application.Phone,
+            Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
+        },
+        new OpenGraphLocation(Application.Latitude, Application.Longitude))
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        SiteName = Application.Name
+    };
+}
+<h2>Acerca de nosotros</h2>
+<h3>Embarazos de alto riesgo</h3>
+
+<p>
+    Medicure se dedica principalmente a la atención, seguimiento y tratamiento de
+    embarazos de alto riesgo en todo el transcurso del mismo. Nuestro largo trayecto
+    en el área nos permite definirnos como expertos en la materia.
+</p>

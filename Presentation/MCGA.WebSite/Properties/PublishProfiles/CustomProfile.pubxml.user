@@ -6,7 +6,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnIty2/BmpkO/jrVzs9IO2gAAAAACAAAAAAAQZgAAAAEAACAAAAAOTdLj1ltRMW5baP4I081l4OATQvrrejfJf2S84ul9IAAAAAAOgAAAAAIAACAAAAB/OWPCa4bTsxF1qGH/mvL+qdSXHrLXacIP5YFHtV93HSAAAACVFrZoOwumiyF0MooSaPdDJy31CO5dK2U1ibA+MEpC0UAAAAAgytzRA7aqzO0eteqQ7E1NcbiaxmGhSqQfJ/mtcVtFawkhwDsYwF3A43yH33MJENq23FSrCmhzQVEQoc/+bIA3</EncryptedPassword>
-    <_PublishTargetUrl>ftp://ar.somee.com/www.ar.somee.com/http://ar.somee.com</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAgze2tUjcgUWlKYi8O7OUnAAAAAACAAAAAAAQZgAAAAEAACAAAACK7IeBQCcDMTjjiG671RlsS5mh0fAWIjBCcML/f/8nPAAAAAAOgAAAAAIAACAAAACw0fWraKiuPScdUE6X9ivaFJn2b4WTbr6RUauFvJQAvyAAAAA4QX5GVDsik9u9YRiBnq1Z5VZPyMxRcd+eaWLZ/WZRpUAAAACClQ4cmvUciUUygrczKP6UJuBFxZkuNdyerFE8K6b23zRwMGBQBSYbs1z2aOtBBeiEEPSU3MVqhfQV/WYUm7vs</EncryptedPassword>
+    <_PublishTargetUrl>ftp://www.ar.somee.com/http://ar.somee.com</_PublishTargetUrl>
   </PropertyGroup>
 </Project>
