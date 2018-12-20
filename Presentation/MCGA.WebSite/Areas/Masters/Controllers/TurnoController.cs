@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -9,8 +8,7 @@ using PagedList;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Globalization;
-using Microsoft.Ajax.Utilities;
-using System.Web.Script.Serialization;
+using log4net;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -21,13 +19,48 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private EspecialidadProcess especialidadProcess = new EspecialidadProcess();
         private ProfesionalProcess profesionalProcess = new ProfesionalProcess();
 
+        private static ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(EspecialidadController));
+
         static int EspecialidadId { get; set; }
         static int ProfesionalId { get; set; }
 
         // GET: Masters/Turno
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
-            return View(process.Get());
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<Turno> turnos = process.Get();
+            DateTime result;
+            if (DateTime.TryParseExact(searchString, "dd/MM/yyyy",
+                           CultureInfo.InvariantCulture,
+                           DateTimeStyles.None,
+                           out result))
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    turnos = turnos
+                        .Where(s => s.Fecha.ToShortDateString().Contains(result.ToShortDateString()));
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    turnos = turnos
+                        .Where(s => s.EspecialidadesProfesional.Profesional.Nombre.ToLower().Contains(searchString.ToLower()) ||
+                            s.EspecialidadesProfesional.Profesional.Apellido.ToLower().Contains(searchString.ToLower()));
+                }
+            }                        
+            turnos = turnos.OrderBy(o => o.Fecha);
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(turnos.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult ListBase()
         {
@@ -85,15 +118,23 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Fecha,Hora,AfiliadoId,EspecialidadProfesionalId,reserva,Observaciones,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Turno turno)
         {
-            if (ModelState.IsValid)
+            try
             {
-                turno.createdby = User.Identity.GetUserId();
-                process.Create(turno);
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    turno.createdby = User.Identity.GetUserId();
+                    process.Create(turno);
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
-            return View(turno);
+                ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
+                return View(turno);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(turno);
+            }
         }
 
         // GET: Masters/Turno/Edit/5
@@ -119,13 +160,21 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Fecha,Hora,AfiliadoId,EspecialidadProfesionalId,reserva,Observaciones,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Turno turno)
         {
-            if (ModelState.IsValid)
+            try
             {
-                process.Update(turno);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    process.Update(turno);
+                    return RedirectToAction("Index");
+                }
+                ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
+                return View(turno);
             }
-            ViewBag.AfiliadoId = new SelectList(afiliadoProcess.SelectList(), "Id", "Nombre", turno.AfiliadoId);
-            return View(turno);
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(turno);
+            }
         }
 
         // GET: Masters/Turno/Delete/5
@@ -148,9 +197,17 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var turno = process.GetDetail(id);
-            process.Delete(turno);
-            return RedirectToAction("Index");
+            try
+            {
+                var turno = process.GetDetail(id);
+                process.Delete(turno);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -256,6 +313,7 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
             var total = horarios
                 .Select(x => new string[] { x.Hour.ToString(), x.Hour.Add(TimeSpan.FromMinutes(40)).ToString() }).ToList();
+            //return Json(total, JsonRequestBehavior.AllowGet);
             ViewData["myHours"] = total;
             return new EmptyResult();
 
@@ -265,22 +323,36 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         public ActionResult Register(string dia, string hora, string observaciones, int afiliadoId)
 
         {
-            var especialidadProfesionalId = process.getEspecialidadProfesionalId(ProfesionalId, EspecialidadId);
-            string format = "MM/dd/yyyy";
-
-            var turno = new Turno
+            try
             {
-                Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
-                Hora = TimeSpan.Parse(hora),
-                Observaciones = observaciones,
-                EspecialidadProfesionalId = especialidadProfesionalId,
-                AfiliadoId = afiliadoId,
-                createdon = DateTime.Now,
-                changedon = DateTime.Now
-            };
+                var especialidadProfesionalId = process.getEspecialidadProfesionalId(ProfesionalId, EspecialidadId);
+                string format = "MM/dd/yyyy";
 
-            process.Create(turno);
-            return View("home");
+                var turno = new Turno
+                {
+                    Fecha = DateTime.ParseExact(dia, format, CultureInfo.InvariantCulture),
+                    Hora = TimeSpan.Parse(hora),
+                    Observaciones = observaciones,
+                    EspecialidadProfesionalId = especialidadProfesionalId,
+                    AfiliadoId = afiliadoId,
+                    createdon = DateTime.Now,
+                    changedon = DateTime.Now
+                };
+
+                process.Create(turno);
+                return new EmptyResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult GeneratePdf(int id)
+        {
+            process.GeneratePdf(id);
+            return View("GeneratePdf");
         }
     }
 }

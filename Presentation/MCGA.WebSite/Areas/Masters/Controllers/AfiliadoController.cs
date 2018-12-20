@@ -7,6 +7,8 @@ using MCGA.UI.Process;
 using MCGA.WebSite.Constants.AfiliadoController;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using log4net;
+using System;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -17,6 +19,8 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private TipoSexoProcess tipoSexoComponent = new TipoSexoProcess();
         private EstadoCivilProcess estadoCivilProcess = new EstadoCivilProcess();
         private PlanProcess planProcess = new PlanProcess();
+        private static ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(AfiliadoController));
         // GET: Masters/Afiliado
 
         //[Route("vertodos", Name = AfiliadoControllerRoute.GetEntities)]
@@ -87,17 +91,25 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,TipoSexoId,FechaNacimiento,EstadoCivilId,NumeroAfiliado,PlanId,Foto,Habilitado,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Afiliado afiliado)
         {
-            if (ModelState.IsValid)
+            try
             {
-                afiliado.createdby = User.Identity.GetUserId();
-                component.Create(afiliado);
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    afiliado.createdby = User.Identity.GetUserId();
+                    component.Create(afiliado);
+                    return RedirectToAction("List");
+                }
+                ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
+                ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
+                ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+                ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
+                return View(afiliado);
             }
-            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
-            ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
-            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
-            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
-            return View(afiliado);
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(afiliado);
+            }
         }
 
         // GET: Masters/Afiliado/Edit/5
@@ -127,17 +139,25 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,TipoSexoId,FechaNacimiento,EstadoCivilId,NumeroAfiliado,PlanId,Foto,Habilitado,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Afiliado afiliado)
         {
-            if (ModelState.IsValid)
+            try
             {
-                afiliado.changedby = User.Identity.GetUserId();
-                component.Update(afiliado);
-                return RedirectToAction("List");
-            }            
-            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
-            ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
-            ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
-            ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
-            return View(afiliado);
+                if (ModelState.IsValid)
+                {
+                    afiliado.changedby = User.Identity.GetUserId();
+                    component.Update(afiliado);
+                    return RedirectToAction("List");
+                }            
+                ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", afiliado.TipoDocumentoId);
+                ViewBag.TipoSexoId = new SelectList(tipoSexoComponent.SelectList(), "Id", "descripcion", afiliado.TipoSexoId);
+                ViewBag.EstadoCivilId = new SelectList(estadoCivilProcess.SelectList(), "Id", "descripcion");
+                ViewBag.PlanId = new SelectList(planProcess.SelectList(), "Id", "descripcion");
+                return View(afiliado);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(afiliado);
+            }
         }
 
         // GET: Masters/Afiliado/Delete/5
@@ -161,10 +181,18 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            try
+            {
             var afiliado = component.GetDetail(id);
             afiliado.deletedby = User.Identity.GetUserId();
             component.Delete(afiliado);
             return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("List");
+            }
         }
 
         protected override void Dispose(bool disposing)

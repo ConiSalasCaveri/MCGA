@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using log4net;
 using MCGA.Entities;
 using MCGA.UI.Process;
 using PagedList;
@@ -12,6 +14,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
     public class EspecialidadController : Controller
     {        
         private EspecialidadProcess component = new EspecialidadProcess();
+
+        private static ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(EspecialidadController));
 
         // GET: Masters/Especialidad
         public ActionResult Index()
@@ -70,14 +75,23 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,descripcion,frecuencia,TipoEspecialidadId")] Especialidad especialidad)
         {
-            if (ModelState.IsValid)
+            try
             {
-                component.Create(especialidad);
-                DataCache.Instance.Clear();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    component.Create(especialidad);
+                    DataCache.Instance.Clear();
+                    return RedirectToAction("Index");
+                }
+
+                return View(especialidad);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(especialidad);
             }
 
-            return View(especialidad);
         }
 
         // GET: Masters/Especialidad/Edit/5
@@ -102,13 +116,21 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,descripcion,frecuencia,TipoEspecialidadId")] Especialidad especialidad)
         {
-            if (ModelState.IsValid)
+            try
             {
-                component.Update(especialidad);
-                DataCache.Instance.Clear();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    component.Update(especialidad);
+                    DataCache.Instance.Clear();
+                    return RedirectToAction("Index");
+                }
+                return View(especialidad);
             }
-            return View(especialidad);
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(especialidad);
+            }
         }
 
         // GET: Masters/Especialidad/Delete/5
@@ -131,10 +153,18 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var especialidad = component.GetDetail(id);
-            component.Delete(especialidad);
-            DataCache.Instance.Clear();
-            return RedirectToAction("Index");
+            try
+            {
+                var especialidad = component.GetDetail(id);
+                component.Delete(especialidad);
+                DataCache.Instance.Clear();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

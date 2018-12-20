@@ -7,6 +7,8 @@ using MCGA.UI.Process;
 using WebApplication1.Services.Cache;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using System;
+using log4net;
 
 namespace MCGA.WebSite.Areas.Masters.Controllers
 {
@@ -16,6 +18,9 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         private ProfesionalProcess component = new ProfesionalProcess();
         private TipoDocumentoProcess tipoDocumentoComponent = new TipoDocumentoProcess();
         private ProfesionalEspecialidadProcess profesionalEspecialidadIds = new ProfesionalEspecialidadProcess();
+
+        private static ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(ProfesionalController));
         private static int profesionalId { get; set; }
         private static int profesionalIdForDelete { get; set; }
 
@@ -94,17 +99,25 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,FechaNacimiento,Matricula")] Profesional profesional)
-        {            
-            if (ModelState.IsValid)
+        {
+            try
             {
-                profesional.createdby = User.Identity.GetUserId();
-                component.Create(profesional);
-                DataCache.Instance.Clear();
-                return RedirectToAction("List");
-            }
+                if (ModelState.IsValid)
+                {
+                    profesional.createdby = User.Identity.GetUserId();
+                    component.Create(profesional);
+                    DataCache.Instance.Clear();
+                    return RedirectToAction("List");
+                }
 
-            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
-            return View(profesional);
+                ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
+                return View(profesional);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(profesional);
+            }
         }
 
         // GET: Masters/Profesional/Edit/5
@@ -130,15 +143,23 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nombre,Apellido,TipoDocumentoId,Numero,Direccion,Telefono,Email,FechaNacimiento,Matricula,Foto,createdon,createdby,changedon,changedby,deletedon,deletedby,isdeleted")] Profesional profesional)
         {
-            if (ModelState.IsValid)
+            try
             {
-                profesional.changedby = User.Identity.GetUserId();
-                component.Update(profesional);
-                DataCache.Instance.Clear();
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    profesional.changedby = User.Identity.GetUserId();
+                    component.Update(profesional);
+                    DataCache.Instance.Clear();
+                    return RedirectToAction("List");
+                }
+                ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
+                return View(profesional);
             }
-            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
-            return View(profesional);
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return View(profesional);
+            }
         }
 
         // GET: Masters/Profesional/Delete/5
@@ -161,11 +182,19 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var profesional = component.GetDetail(id);
-            profesional.deletedby = User.Identity.GetUserId();
-            component.Delete(profesional);
-            DataCache.Instance.Clear();
-            return RedirectToAction("List");
+            try
+            {
+                var profesional = component.GetDetail(id);
+                profesional.deletedby = User.Identity.GetUserId();
+                component.Delete(profesional);
+                DataCache.Instance.Clear();
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("List");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -179,23 +208,39 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
         public ActionResult Especialidad(int id)
         {
-            profesionalId = id;
-            var profesional = component.GetDetail(id);
-            if (profesional == null)
+            try
             {
-                return HttpNotFound();
+                profesionalId = id;
+                var profesional = component.GetDetail(id);
+                if (profesional == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
+                return View(profesional);
             }
-            ViewBag.TipoDocumentoId = new SelectList(tipoDocumentoComponent.SelectList(), "Id", "descripcion", profesional.TipoDocumentoId);
-            return View(profesional);
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("List");
+            }
         }
 
         public ActionResult ProfesionalEspecialidad(int id)
         {
-            var especialidadProfesional = new EspecialidadesProfesional {
-                EspecialidadId = id,
-                ProfesionalId = profesionalId };
-            profesionalEspecialidadIds.Create(especialidadProfesional);
-            return RedirectToAction("List");
+            try
+            {
+                var especialidadProfesional = new EspecialidadesProfesional {
+                    EspecialidadId = id,
+                    ProfesionalId = profesionalId };
+                profesionalEspecialidadIds.Create(especialidadProfesional);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("List");
+            }
         }
 
         public JsonResult GetEspecialidades(string Areas, string term)
@@ -216,8 +261,16 @@ namespace MCGA.WebSite.Areas.Masters.Controllers
 
         public ActionResult DeleteEspecialidad(int id)
         {
-            component.DeleteEspecialidadOfProfesional(id, profesionalIdForDelete);
-            return RedirectToAction("List");
+            try
+            {
+                component.DeleteEspecialidadOfProfesional(id, profesionalIdForDelete);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                return RedirectToAction("List");
+            }
         }
     }
 }

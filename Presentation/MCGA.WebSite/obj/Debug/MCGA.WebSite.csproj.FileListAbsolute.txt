@@ -417,3 +417,13 @@ C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.dll
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.Mvc.dll
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.xml
 C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PagedList.Mvc.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\log4net.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\log4net.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PdfSharp.Charting.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PdfSharp.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PdfSharp.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\PdfSharp.Charting.xml
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\de\PdfSharp.resources.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\de\PdfSharp.Charting.resources.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\itextsharp.dll
+C:\MCGA\MCGA\Presentation\MCGA.WebSite\bin\itextsharp.xml

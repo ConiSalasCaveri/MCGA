@@ -13,90 +13,92 @@
 {
     @Html.AntiForgeryToken()
 }
-    <div class="form-horizontal">
-        <h4>Turno</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label col-md-2">Fecha del turno</label>
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' id="mydatepicker" class="form-control" placeholder="Ingrese una fecha" onchange="onChangeCalender()"/>
-            </div>
-            @*<div class="col-md-10">
-                    @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                </div>*@
+<div class="form-horizontal">
+    <h4>Turno</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Fecha del turno</label>
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' id="mydatepicker" class="form-control" placeholder="Ingrese una fecha" onchange="onChangeCalender()" />
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Hora del turno</label>
-            <div>
-                <input type="text" data-time-format="H:i" id="myTimer" placeholder="Seleccione la hora." />
-            </div>
-            @*<div class="col-md-10">
-                    @Html.EditorFor(model => model.Hora, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Hora, "", new { @class = "text-danger" })
-                </div>*@
-        </div>
-        <div class="_form-horizontal">
-            <div class="form-group">
-                <label for="AfiliadoName" class="control-label col-md-2">Afiliado</label>
-                <div class="col-md-10">
-                    <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="AfiliadoName" name="AfiliadoName" type="text" value="" placeholder="Ingrese el afiliado" style="display: inline-block;" />
-                    <span class="field-validation-valid text-danger" data-valmsg-for="AfiliadoName" data-valmsg-replace="true" style="display: inline-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input class="form-control text-box single-line" id="afiliadoId" type="hidden" />
-                </div>
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.AfiliadoId, "Afiliado", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("AfiliadoId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.AfiliadoId, "", new { @class = "text-danger" })
-                </div>
+        @*<div class="col-md-10">
+                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
             </div>*@
+    </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.EspecialidadProfesionalId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.EspecialidadProfesionalId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.EspecialidadProfesionalId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.reserva, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.reserva, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.reserva, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        <label class="control-label col-md-2">Observaciones</label>
-        <div class="form-group">
-            <input type="text" id="myObservacion" />
-            @*@Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
-                </div>*@
+    <div class="form-group">
+        <label class="control-label col-md-2">Hora del turno</label>
+        <div>
+            <input type="text" data-time-format="H:i" id="myTimer" placeholder="Seleccione la hora." />
         </div>
-
+        @*<div class="col-md-10">
+                @Html.EditorFor(model => model.Hora, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Hora, "", new { @class = "text-danger" })
+            </div>*@
+    </div>
+    <div class="_form-horizontal">
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @*<input type="submit" value="Crear" class="btn btn-default" />*@
-                <input class="btn btn-primary" type="button" id="crear" value="Tomar turno" />
+            <label for="AfiliadoName" class="control-label col-md-2">Afiliado</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="AfiliadoName" name="AfiliadoName" type="text" value="" placeholder="Ingrese el afiliado" style="display: inline-block;" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="AfiliadoName" data-valmsg-replace="true" style="display: inline-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="afiliadoId" type="hidden" />
             </div>
         </div>
     </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.AfiliadoId, "Afiliado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AfiliadoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AfiliadoId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.EspecialidadProfesionalId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EspecialidadProfesionalId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EspecialidadProfesionalId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.reserva, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.reserva, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reserva, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <label class="control-label col-md-2">Observaciones</label>
+    <div class="form-group">
+        <input type="text" id="myObservacion" />
+        @*@Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+            </div>*@
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" value="Crear" class="btn btn-default" />*@
+            <input class="btn btn-primary" type="button" id="crear" value="Tomar turno"/>
+        @Html.ActionLink("Ver turnos", "Index", "Turno", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
         $("#AfiliadoName").autocomplete({
             autoSelect: true,
             autoFocus: true,
@@ -117,11 +119,11 @@
                 $("#afiliadoId").val(ui.item.Id);
             }
         });
-        </script>
+    </script>
 
-    }
+}
 
-    <script>
+<script>
         function onChangeCalender() {
             setTimeout(function () {
             var myDate = $('#mydatepicker').val();
@@ -132,66 +134,71 @@
                 contentType: "application/json; charset=utf-8",
                 data: '{dia: "' + myDate + '"}',
                 dataType: "json",
-                success: function (response) {
-                }
-            });
-            }, 2000);            
-       }
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            $('#mydatepicker').datepicker(
-                {
-                    beforeShowDay: $.datepicker.noWeekends,
-                    minDate: 3,
-                    maxDate: "+3M",
-                }
-             );
-        });
-    </script>
-@*<script>
-    $(document).change(function () {
-           $('#myTimer').timepicker({
-                'step': 40,
-                'disableTimeRanges': @Html.Raw(Json.Encode(@ViewData["myHours"])),
-                'minTime': '9:00am',
-                'maxTime': '19:00pm'
-        });
-    })
-</script>*@
-    <script type="text/javascript">
-            $('#myTimer').timepicker({
-                'step': 40,
-                'disableTimeRanges': @Html.Raw(Json.Encode(@ViewData["myHours"])),
-                'minTime': '9:00am',
-                'maxTime': '19:00pm'
-        });
-    </script>    
-    <script type="text/javascript">
-        $(function () {
-            $("#crear").click(function () {
-                var myTimeDato = $("#myTimer").val();
-                var myFechaDato = $("#mydatepicker").val();
-                var myAfiliadoDato = $("#afiliadoId").val();
-                $.ajax({
-                    type: "POST",
-                    url: "/Turno/Register",
-                    data: '{dia: "' + myFechaDato + '", hora: "' + myTimeDato + '", observaciones:"' + $("#myObservacion").val() + '", afiliadoId:"' + myAfiliadoDato + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
-                    },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
-                    }
+                //success: function (response) {
+                //}
+            })
+                .done(function (response) {
+                    actualizarTimer(response);
                 });
+            }, 1000);
+       }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#mydatepicker').datepicker(
+            {
+                beforeShowDay: $.datepicker.noWeekends,
+                minDate: 3,
+                maxDate: "+3M",
+            }
+        );
+    });
+</script>
+@*<script>
+        $(function actualizarTimer(rangos) {
+               $('#myTimer').timepicker({
+                    'step': 40,
+                    'disableTimeRanges': @Html.Raw(Json.Encode(@ViewData["myHours"])),
+                    'minTime': '9:00am',
+                    'maxTime': '19:00pm'
             });
+        })
+    </script>*@
+<script type="text/javascript">        
+    $('#myTimer').timepicker({
+        'step': 40,
+        'disableTimeRanges':@Html.Raw(Json.Encode(@ViewData["myHours"])),
+        //'disableTimeRanges': rangos,
+        'minTime': '9:00am',
+        'maxTime': '19:00pm'
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#crear").click(function () {            
+            var myTimeDato = $("#myTimer").val();
+            var myFechaDato = $("#mydatepicker").val();
+            var myAfiliadoDato = $("#afiliadoId").val();
+            $.ajax({
+                type: "POST",
+                url: "/Turno/Register",
+                data: '{dia: "' + myFechaDato + '", hora: "' + myTimeDato + '", observaciones:"' + $("#myObservacion").val() + '", afiliadoId:"' + myAfiliadoDato + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                },
+                failure: function (response) {
+                    //alert(response.responseText);
+                },
+                error: function (response) {
+                    //alert(response.responseText);
+                }
+            })                
+                    confirm("Turno creado con éxito, por favor presione VER TURNOS para ver los turnos existentes.");
         });
-    </script>
+    });
+</script>
 
 

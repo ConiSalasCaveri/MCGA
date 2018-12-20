@@ -67,5 +67,34 @@ namespace MCGA.Business
                 .ToList();
             return turnos;
         }
+
+        public Turno GetById(int id)
+        {
+            var turno = db.Turno.Find(id);
+            return turno;
+        }
+
+        public int[] GetByMonth()
+        {
+            var turnoArray = new List<int>();
+
+            for (int i = 1; i < 13; i++)
+            {
+                var turno = db.Turno
+                    .Where(x => x.Fecha.Month == i)
+                    .ToList();
+
+                if (turno.Count() == 0)
+                {
+                    turnoArray.Add(0);
+                }
+                else
+                {
+                    turnoArray.Add(turno.Count());
+                }
+            }
+
+            return turnoArray.ToArray();
+        }
     }
 }

@@ -15,12 +15,12 @@
     <div class="form-group">
         <label for="ProfesionalName" class="control-label col-md-2">Profesional</label>
         <div class="col-md-10">
-            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="ProfesionalName" name="ProfesionalName" type="text" value="" placeholder="Ingrese las primeras letras de la especialidad" style="display: inline-block;" />
+            <input class="form-control text-box single-line" data-val="true" data-val-required="Requerido" id="ProfesionalName" name="ProfesionalName" type="text" value="" placeholder="Ingrese las primeras letras de la especialidad" style="display: inline-block;" required/>
             <span class="field-validation-valid text-danger" data-valmsg-for="ProfesionalName" data-valmsg-replace="true" style="display: inline-block"></span>
             <div style=" margin-left: 50px; display: inline-block">
 
                 @*@Html.ActionLink("Ver profesionales", "ListaTurnos", new { profesionalId: $("#profesionalId").val() } )*@
-                <input class="btn btn-primary" type="button" id="profesional" value="Ver estudios" onclick="irATurnos()" />
+                <input class="btn btn-primary" type="submit" id="profesional" value="Ver estudios" onclick="irATurnos()" />
                 @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@
             </div>
         </div>

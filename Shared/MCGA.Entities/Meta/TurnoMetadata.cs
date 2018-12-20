@@ -12,6 +12,9 @@ namespace MCGA.Entities
     {
         public class TurnoMetadata
         {
+
+            [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}", ApplyFormatInEditMode = true)]
+            public System.DateTime Fecha { get; set; }
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<div name="container" id="container"></div>
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Turnos tomados por mes'
+        },
+        subtitle: {
+            text: 'Fuente: Medicure.com'
+        },
+        xAxis: {
+            categories: [
+                'Ene',
+                'Feb',
+                'Mar',
+                'Abr',
+                'May',
+                'Jun',
+                'Jul',
+                'Ago',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dic'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Numero de turnos'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} turnos</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Clínica medicure',
+            data: @Html.Raw(Json.Encode(@ViewData["dataToShow"]))
+             @*data: @Html.Raw(@ViewData["dataToShow"])*@
+
+        }]
+    });
+</script>
